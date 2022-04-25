@@ -28,6 +28,7 @@ buildscript {
 
         //3rd-party libs
         timberVersion = "5.0.1"
+        calendarViewVersion = "3.7.1"
     }
 }
 

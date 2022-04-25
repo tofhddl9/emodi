@@ -1,4 +1,4 @@
-package com.lgtm.default_Android_Project_Template
+package com.lgtm.emoji_diary
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp

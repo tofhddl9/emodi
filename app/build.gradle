@@ -11,7 +11,7 @@ android {
     compileSdk 31
 
     defaultConfig {
-        applicationId "com.lgtm.default_android_project_template"
+        applicationId "com.lgtm.emoji_diary"
         minSdk 23
         targetSdk 31
         versionCode 1
@@ -69,6 +69,7 @@ dependencies {
 
     // 3rd-party libs
     debugImplementation "com.jakewharton.timber:timber:$rootProject.timberVersion"
+    implementation "com.haibin:calendarview:$rootProject.calendarViewVersion"
 
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'

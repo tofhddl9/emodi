@@ -1,4 +1,4 @@
-package com.lgtm.default_Android_Project_Template.delegate
+package com.lgtm.emoji_diary.delegate
 
 import android.view.View
 import androidx.fragment.app.Fragment

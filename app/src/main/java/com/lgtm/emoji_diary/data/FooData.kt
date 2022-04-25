@@ -1,4 +1,4 @@
-package com.lgtm.default_Android_Project_Template.data
+package com.lgtm.emoji_diary.data
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

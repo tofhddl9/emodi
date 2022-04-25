@@ -1,12 +1,12 @@
-package com.lgtm.default_Android_Project_Template.di
+package com.lgtm.emoji_diary.di
 
 import android.content.Context
 import androidx.room.Room
-import com.lgtm.default_Android_Project_Template.data.source.FooDataSource
-import com.lgtm.default_Android_Project_Template.data.source.FooRepository
-import com.lgtm.default_Android_Project_Template.data.source.FooRepositoryImpl
-import com.lgtm.default_Android_Project_Template.data.source.local.FooDatabase
-import com.lgtm.default_Android_Project_Template.data.source.local.FooLocalDataSource
+import com.lgtm.emoji_diary.data.source.FooDataSource
+import com.lgtm.emoji_diary.data.source.FooRepository
+import com.lgtm.emoji_diary.data.source.FooRepositoryImpl
+import com.lgtm.emoji_diary.data.source.local.FooDatabase
+import com.lgtm.emoji_diary.data.source.local.FooLocalDataSource
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

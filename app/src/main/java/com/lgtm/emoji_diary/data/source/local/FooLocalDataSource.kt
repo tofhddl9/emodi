@@ -1,6 +1,6 @@
-package com.lgtm.default_Android_Project_Template.data.source.local
+package com.lgtm.emoji_diary.data.source.local
 
-import com.lgtm.default_Android_Project_Template.data.source.FooDataSource
+import com.lgtm.emoji_diary.data.source.FooDataSource
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 

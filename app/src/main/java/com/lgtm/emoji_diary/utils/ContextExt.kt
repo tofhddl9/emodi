@@ -1,4 +1,4 @@
-package com.lgtm.default_Android_Project_Template.utils
+package com.lgtm.emoji_diary.utils
 
 import android.content.Context
 import android.location.LocationManager
