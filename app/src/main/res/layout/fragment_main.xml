@@ -13,9 +13,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@id/monthView"
+        android:layout_marginTop="16dp"
         app:layout_constraintVertical_chainStyle="packed"
-        app:layout_constraintVertical_bias="0.3"
-        android:textSize="18sp"
+        app:layout_constraintVertical_bias="0.25"
+        android:textSize="22sp"
         tools:text="2022" />
 
     <TextView
@@ -26,20 +27,32 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/yearView"
-        app:layout_constraintBottom_toTopOf="@id/calendarView"
+        app:layout_constraintBottom_toTopOf="@id/calendarLayout"
         android:textSize="32sp"
         android:textStyle="bold"
         tools:text="October"/>
 
-    <com.haibin.calendarview.CalendarView
-        android:id="@+id/calendarView"
+    <com.haibin.calendarview.CalendarLayout
+        android:id="@+id/calendarLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/monthView"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:month_view="com.lgtm.emoji_diary.widgets.EmojiCalendarView"
-        app:month_view_show_mode="mode_only_current" />
+        android:orientation="vertical"
+        android:background="#fff"
+        app:default_status="expand">
+
+        <com.haibin.calendarview.CalendarView
+            android:id="@+id/calendarView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:min_year="1950"
+            app:max_year="2050"
+            app:month_view="com.lgtm.emoji_diary.widgets.EmojiCalendarView"
+            app:month_view_show_mode="mode_only_current" />
+
+    </com.haibin.calendarview.CalendarLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
