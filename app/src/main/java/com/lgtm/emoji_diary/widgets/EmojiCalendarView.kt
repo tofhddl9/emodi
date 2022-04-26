@@ -22,6 +22,12 @@ class EmojiCalendarView constructor(
         textSize = 16.toPx(context).toFloat()
     }
 
+//    data class EmojiInfo(val id: Long)
+//    val emojiInfo: MutableMap<Calendar, EmojiInfo> = mutableMapOf()
+//    Concept
+//    1. 그릴 때, 이 map에서 Emoji정보를 조회
+//    2. 해당 key값이 있다면, value에 해당하는 emoji 데이터로 그리고, 없으면 일반 달력
+
     override fun onDrawSelected(
         canvas: Canvas,
         calendar: Calendar,
@@ -36,7 +42,7 @@ class EmojiCalendarView constructor(
     override fun onDrawScheme(canvas: Canvas, calendar: Calendar, x: Int, y: Int) {
         canvas.drawCircle(
             x.toFloat() + mItemWidth / 2,
-            y + mItemHeight - 3 * 10f,
+            y + mItemHeight - 3 * 0f,
             16f,
             paint
         )
@@ -65,7 +71,7 @@ class EmojiCalendarView constructor(
         else if (hasScheme) {
             canvas.drawText(
                 calendar.day.toString(), cx.toFloat(), mTextBaseLine + top,
-                if (calendar.isCurrentMonth && isInRange) mSchemeTextPaint else mOtherMonthTextPaint
+                if (calendar.isCurrentMonth && isInRange) mCurMonthTextPaint else mOtherMonthTextPaint
             )
         }
         else {

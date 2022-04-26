@@ -1,4 +1,4 @@
-package com.lgtm.emoji_diary
+package com.lgtm.emoji_diary.calendar
 
 import android.os.Bundle
 import android.view.View
@@ -6,13 +6,14 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.haibin.calendarview.Calendar
 import com.haibin.calendarview.CalendarView
-import com.lgtm.emoji_diary.databinding.FragmentMainBinding
+import com.lgtm.emoji_diary.R
+import com.lgtm.emoji_diary.databinding.FragmentCalendarBinding
 import com.lgtm.emoji_diary.delegate.viewBinding
 import com.lgtm.emoji_diary.utils.CalendarUtil
 
-class MainFragment : Fragment(R.layout.fragment_main), CalendarView.OnCalendarSelectListener, CalendarView.OnYearChangeListener {
+class CalendarFragment : Fragment(R.layout.fragment_calendar), CalendarView.OnCalendarSelectListener, CalendarView.OnYearChangeListener {
 
-    private val binding: FragmentMainBinding by viewBinding(FragmentMainBinding::bind)
+    private val binding: FragmentCalendarBinding by viewBinding(FragmentCalendarBinding::bind)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
