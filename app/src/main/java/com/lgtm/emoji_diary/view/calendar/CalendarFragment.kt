@@ -1,4 +1,4 @@
-package com.lgtm.emoji_diary.calendar
+package com.lgtm.emoji_diary.view.calendar
 
 import android.os.Bundle
 import android.view.View

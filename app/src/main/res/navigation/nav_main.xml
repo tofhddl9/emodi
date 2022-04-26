@@ -3,11 +3,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_main"
-    app:startDestination="@id/main_fragment">
+    app:startDestination="@id/calendar_fragment">
 
     <fragment
-        android:id="@+id/main_fragment"
-        android:name="com.lgtm.emoji_diary.calendar.CalendarFragment" >
+        android:id="@+id/calendar_fragment"
+        android:name="com.lgtm.emoji_diary.view.calendar.CalendarFragment" >
     </fragment>
+
+    <fragment
+        android:id="@+id/edit_fragment"
+        android:name="com.lgtm.emoji_diary.view.calendar.CalendarFragment" >
+    </fragment>
+
+    <fragment
+        android:id="@+id/detail_fragment"
+        android:name="com.lgtm.emoji_diary.view.calendar.CalendarFragment" >
+    </fragment>
+
 
 </navigation>
