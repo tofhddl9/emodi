@@ -1,4 +1,4 @@
-package com.lgtm.emoji_diary.view.calendar
+package com.lgtm.emoji_diary.view.home.calendar
 
 import android.os.Bundle
 import android.view.View
@@ -26,7 +26,6 @@ class CalendarFragment : Fragment(R.layout.fragment_calendar), CalendarView.OnCa
     private fun initViews() = with(binding) {
         yearView.text = calendarView.curYear.toString()
         monthView.text = CalendarUtil.monthInEnglish(calendarView.curMonth)
-
 //        val calendar = Calendar().apply {
 //            year = 2022
 //            month = 2
@@ -69,6 +68,10 @@ class CalendarFragment : Fragment(R.layout.fragment_calendar), CalendarView.OnCa
 
     override fun onYearChange(year: Int) = with(binding) {
         yearView.text = year.toString()
+    }
+
+    companion object {
+        fun newInstance() = CalendarFragment()
     }
 
 }

@@ -1,23 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_main"
-    app:startDestination="@id/calendar_fragment">
+    app:startDestination="@id/home_fragment">
 
     <fragment
-        android:id="@+id/calendar_fragment"
-        android:name="com.lgtm.emoji_diary.view.calendar.CalendarFragment" >
+        android:id="@+id/home_fragment"
+        android:name="com.lgtm.emoji_diary.view.home.HomeFragment" >
+        <action
+            android:id="@+id/action_home_fragment_to_edit_fragment"
+            app:destination="@id/edit_fragment" />
+        <action
+            android:id="@+id/action_home_fragment_to_detail_fragment"
+            app:destination="@id/detail_fragment" />
     </fragment>
 
     <fragment
         android:id="@+id/edit_fragment"
-        android:name="com.lgtm.emoji_diary.view.calendar.CalendarFragment" >
+        android:name="com.lgtm.emoji_diary.view.edit.EditFragment" >
     </fragment>
 
     <fragment
         android:id="@+id/detail_fragment"
-        android:name="com.lgtm.emoji_diary.view.calendar.CalendarFragment" >
+        android:name="com.lgtm.emoji_diary.view.detail.DetailFragment" >
+        <action
+            android:id="@+id/action_detail_fragment_to_edit_fragment"
+            app:destination="@id/edit_fragment" />
     </fragment>
 
 
