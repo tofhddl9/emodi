@@ -18,6 +18,9 @@
     <fragment
         android:id="@+id/edit_fragment"
         android:name="com.lgtm.emoji_diary.view.edit.EditFragment" >
+        <argument
+            android:name="date"
+            app:argType="com.lgtm.emoji_diary.view.edit.SimpleDate" />
     </fragment>
 
     <fragment

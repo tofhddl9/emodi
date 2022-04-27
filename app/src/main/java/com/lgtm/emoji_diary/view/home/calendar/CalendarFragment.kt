@@ -4,16 +4,20 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.haibin.calendarview.Calendar
 import com.haibin.calendarview.CalendarView
 import com.lgtm.emoji_diary.R
 import com.lgtm.emoji_diary.databinding.FragmentCalendarBinding
 import com.lgtm.emoji_diary.delegate.viewBinding
 import com.lgtm.emoji_diary.utils.CalendarUtil
+import com.lgtm.emoji_diary.view.home.HomeViewModel
 
 class CalendarFragment : Fragment(R.layout.fragment_calendar), CalendarView.OnCalendarSelectListener, CalendarView.OnYearChangeListener {
 
     private val binding: FragmentCalendarBinding by viewBinding(FragmentCalendarBinding::bind)
+
+    private val viewModel: HomeViewModel by viewModels(ownerProducer = { requireParentFragment() })
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

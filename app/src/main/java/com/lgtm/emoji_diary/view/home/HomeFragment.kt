@@ -3,6 +3,7 @@ package com.lgtm.emoji_diary.view.home
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
@@ -10,12 +11,15 @@ import com.lgtm.emoji_diary.R
 import com.lgtm.emoji_diary.ViewPagerFragmentStateAdapter
 import com.lgtm.emoji_diary.databinding.FragmentHomeBinding
 import com.lgtm.emoji_diary.delegate.viewBinding
+import com.lgtm.emoji_diary.utils.CalendarUtil
 import com.lgtm.emoji_diary.view.home.calendar.CalendarFragment
 import com.lgtm.emoji_diary.view.home.timeline.TimelineFragment
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private val binding : FragmentHomeBinding by viewBinding(FragmentHomeBinding::bind)
+
+    private val viewModel: HomeViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -48,7 +52,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private fun setupNavigation() {
         val navController = findNavController()
         binding.fab.setOnClickListener {
-            val action = HomeFragmentDirections.actionHomeFragmentToEditFragment()
+            val lastSelectedDate = viewModel.selectedDate.value ?: CalendarUtil.getCurrentSimpleDate()
+            val action = HomeFragmentDirections.actionHomeFragmentToEditFragment(lastSelectedDate)
             navController.navigate(action)
         }
 

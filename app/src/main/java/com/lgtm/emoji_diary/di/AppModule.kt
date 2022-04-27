@@ -2,11 +2,11 @@ package com.lgtm.emoji_diary.di
 
 import android.content.Context
 import androidx.room.Room
-import com.lgtm.emoji_diary.data.source.FooDataSource
-import com.lgtm.emoji_diary.data.source.FooRepository
-import com.lgtm.emoji_diary.data.source.FooRepositoryImpl
-import com.lgtm.emoji_diary.data.source.local.FooDatabase
-import com.lgtm.emoji_diary.data.source.local.FooLocalDataSource
+import com.lgtm.emoji_diary.data.source.DiaryDataSource
+import com.lgtm.emoji_diary.data.source.DiaryRepository
+import com.lgtm.emoji_diary.data.source.DiaryRepositoryImpl
+import com.lgtm.emoji_diary.data.source.local.DiaryDatabase
+import com.lgtm.emoji_diary.data.source.local.DiaryLocalDataSource
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -23,27 +23,27 @@ object AppModule {
     @Singleton
     @Provides
     fun provideFooLocalDataSource(
-        database: FooDatabase,
+        database: DiaryDatabase,
         ioDispatcher: CoroutineDispatcher
-    ): FooDataSource {
-        return FooLocalDataSource(database.fooDao(), ioDispatcher)
+    ): DiaryDataSource {
+        return DiaryLocalDataSource(database.fooDao(), ioDispatcher)
     }
 
     @Singleton
     @Provides
     fun provideFooRepository(
-        localTasksDataSource: FooDataSource,
+        localTasksDataSource: DiaryDataSource,
         ioDispatcher: CoroutineDispatcher
-    ): FooRepository {
-        return FooRepositoryImpl(localTasksDataSource, ioDispatcher)
+    ): DiaryRepository {
+        return DiaryRepositoryImpl(localTasksDataSource, ioDispatcher)
     }
 
     @Singleton
     @Provides
-    fun provideDataBase(@ApplicationContext context: Context): FooDatabase {
+    fun provideDataBase(@ApplicationContext context: Context): DiaryDatabase {
         return Room.databaseBuilder(
             context.applicationContext,
-            FooDatabase::class.java,
+            DiaryDatabase::class.java,
             "Foo.db"
         ).build()
     }

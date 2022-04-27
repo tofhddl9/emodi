@@ -1,11 +1,11 @@
 package com.lgtm.emoji_diary.data.source.local
 
-import com.lgtm.emoji_diary.data.source.FooDataSource
+import com.lgtm.emoji_diary.data.source.DiaryDataSource
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 
-class FooLocalDataSource(
-    private val fooDao: FooDao,
+class DiaryLocalDataSource(
+    private val fooDao: DiaryDao,
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO,
-) : FooDataSource {
+) : DiaryDataSource {
 }
