@@ -12,6 +12,7 @@ import com.lgtm.emoji_diary.ViewPagerFragmentStateAdapter
 import com.lgtm.emoji_diary.databinding.FragmentHomeBinding
 import com.lgtm.emoji_diary.delegate.viewBinding
 import com.lgtm.emoji_diary.utils.CalendarUtil
+import com.lgtm.emoji_diary.utils.setChildFragmentResultListener
 import com.lgtm.emoji_diary.view.home.calendar.CalendarFragment
 import com.lgtm.emoji_diary.view.home.timeline.TimelineFragment
 
@@ -27,12 +28,14 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         setupViewPager()
 
         setupNavigation()
+
+        setupFragmentResultListener()
     }
 
     private fun setupViewPager() {
         ViewPagerFragmentStateAdapter(
             FRAGMENT_LIST,
-            requireActivity().supportFragmentManager,
+            childFragmentManager,
             lifecycle
         ).also {
             binding.viewPager.adapter = it
@@ -58,6 +61,19 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         }
 
     }
+
+    private fun setupFragmentResultListener() {
+        setChildFragmentResultListener(HomeFragmentResult.KEY_TIMELINE_ON_CLICK) { _, result ->
+            val diaryId = result.get(HomeFragmentResult.KEY_DIARY_ID)
+            // do something
+        }
+
+        setChildFragmentResultListener(HomeFragmentResult.KEY_CALENDAR_ON_CLICK) { _, result ->
+            val diaryId = result.get(HomeFragmentResult.KEY_DIARY_ID)
+            // do something
+        }
+    }
+
 
     companion object {
         val FRAGMENT_LIST = arrayListOf(

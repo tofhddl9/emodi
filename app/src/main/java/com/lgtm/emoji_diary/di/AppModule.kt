@@ -22,7 +22,7 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun provideFooLocalDataSource(
+    fun provideDiaryLocalDataSource(
         database: DiaryDatabase,
         ioDispatcher: CoroutineDispatcher
     ): DiaryDataSource {
@@ -31,7 +31,7 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun provideFooRepository(
+    fun provideDiaryRepository(
         localTasksDataSource: DiaryDataSource,
         ioDispatcher: CoroutineDispatcher
     ): DiaryRepository {
@@ -44,7 +44,7 @@ object AppModule {
         return Room.databaseBuilder(
             context.applicationContext,
             DiaryDatabase::class.java,
-            "Foo.db"
+            "Diary.db"
         ).build()
     }
 

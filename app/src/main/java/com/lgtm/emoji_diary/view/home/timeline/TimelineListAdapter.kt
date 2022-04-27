@@ -8,17 +8,19 @@ import androidx.recyclerview.widget.RecyclerView
 import com.lgtm.emoji_diary.data.Diary
 import com.lgtm.emoji_diary.databinding.ItemTimelineBinding
 
-class TimelineListAdapter : ListAdapter<Diary, TimelineListAdapter.TimelineVH>(TimelineDiffCallback()) {
+class TimelineListAdapter(
+    private val itemClickListener: ((Long) -> Unit)? = null
+) : ListAdapter<Diary, TimelineListAdapter.TimelineVH>(TimelineDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TimelineVH {
         val layoutInflater = LayoutInflater.from(parent.context)
-        val binding = ItemTimelineBinding.inflate(layoutInflater)
+        val binding = ItemTimelineBinding.inflate(layoutInflater, parent, false)
 
         return TimelineVH(binding)
     }
 
     override fun onBindViewHolder(holder: TimelineVH, position: Int) {
-        holder.bind(getItem(position))
+        holder.bind(getItem(position), itemClickListener)
     }
 
 
@@ -26,21 +28,28 @@ class TimelineListAdapter : ListAdapter<Diary, TimelineListAdapter.TimelineVH>(T
         private val binding: ItemTimelineBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(diary: Diary) {
-            // diary를 매핑해서 사용하자.
+        fun bind(diary: Diary, itemClickListener: ((Long) -> Unit)?) {
+            binding.root.setOnClickListener {
+                itemClickListener?.invoke(diary.id)
+            }
+
+            binding.titleView.text = diary.title
+
+//            binding.dateView.text = "2022년 12월 24일"
+//            binding.timeView.text = "12 : 00"
         }
 
     }
 }
 
-class TimelineDiffCallback() : DiffUtil.ItemCallback<Diary>() {
+private class TimelineDiffCallback : DiffUtil.ItemCallback<Diary>() {
 
     override fun areItemsTheSame(oldItem: Diary, newItem: Diary): Boolean {
-        TODO("Not yet implemented")
+        return oldItem.id == newItem.id
     }
 
     override fun areContentsTheSame(oldItem: Diary, newItem: Diary): Boolean {
-        TODO("Not yet implemented")
+        return oldItem == newItem
     }
 
 }

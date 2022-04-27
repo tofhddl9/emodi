@@ -12,7 +12,9 @@ import com.lgtm.emoji_diary.databinding.FragmentCalendarBinding
 import com.lgtm.emoji_diary.delegate.viewBinding
 import com.lgtm.emoji_diary.utils.CalendarUtil
 import com.lgtm.emoji_diary.view.home.HomeViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class CalendarFragment : Fragment(R.layout.fragment_calendar), CalendarView.OnCalendarSelectListener, CalendarView.OnYearChangeListener {
 
     private val binding: FragmentCalendarBinding by viewBinding(FragmentCalendarBinding::bind)
