@@ -7,9 +7,12 @@ import com.lgtm.emoji_diary.data.source.DiaryRepository
 import com.lgtm.emoji_diary.data.source.DiaryRepositoryImpl
 import com.lgtm.emoji_diary.data.source.local.DiaryDatabase
 import com.lgtm.emoji_diary.data.source.local.DiaryLocalDataSource
+import com.lgtm.emoji_diary.view.edit.validate.ValidateContent
+import com.lgtm.emoji_diary.view.edit.validate.ValidateTitle
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ViewModelComponent
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
@@ -51,5 +54,17 @@ object AppModule {
     @Singleton
     @Provides
     fun provideIoDispatcher(): CoroutineDispatcher = Dispatchers.IO
+
+}
+
+@Module
+@InstallIn(ViewModelComponent::class)
+object EditViewModelModule {
+
+    @Provides
+    fun provideValidateTitle(): ValidateTitle = ValidateTitle()
+
+    @Provides
+    fun provideValidateContent(): ValidateContent = ValidateContent()
 
 }

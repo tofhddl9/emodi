@@ -9,6 +9,7 @@ import com.lgtm.emoji_diary.data.source.DiaryRepository
 import com.lgtm.emoji_diary.data.source.Result
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 @HiltViewModel
@@ -22,18 +23,18 @@ class TimelineViewModel @Inject constructor(
 
     fun getDiaries() {
         viewModelScope.launch {
-            val result = diaryRepository.getDiaries()
-            when (result) {
-                is Result.Success -> {
-                    _uiState.value = _uiState.value?.copy(
-                        // diaryList = result.data
-                        // diaryList = listOf(Diary(id=1, title="test"))
-                    )
-                }
-                is Result.Error -> {
-                    _uiState.value = _uiState.value?.copy(
-                        loadErrorMessage = "타임라인을 불러오는데 실패했습니다."
-                    )
+            diaryRepository.getDiaries().collect { result ->
+                when (result) {
+                    is Result.Success -> {
+                        _uiState.value = _uiState.value?.copy(
+                            diaryList = result.data
+                        )
+                    }
+                    is Result.Error -> {
+                        _uiState.value = _uiState.value?.copy(
+                            loadErrorMessage = "타임라인을 불러오는데 실패했습니다."
+                        )
+                    }
                 }
             }
         }

@@ -13,9 +13,12 @@ import com.lgtm.emoji_diary.databinding.FragmentHomeBinding
 import com.lgtm.emoji_diary.delegate.viewBinding
 import com.lgtm.emoji_diary.utils.CalendarUtil
 import com.lgtm.emoji_diary.utils.setChildFragmentResultListener
+import com.lgtm.emoji_diary.view.edit.getCurrentSimpleDate
 import com.lgtm.emoji_diary.view.home.calendar.CalendarFragment
 import com.lgtm.emoji_diary.view.home.timeline.TimelineFragment
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private val binding : FragmentHomeBinding by viewBinding(FragmentHomeBinding::bind)
@@ -55,7 +58,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private fun setupNavigation() {
         val navController = findNavController()
         binding.fab.setOnClickListener {
-            val lastSelectedDate = viewModel.selectedDate.value ?: CalendarUtil.getCurrentSimpleDate()
+            val lastSelectedDate = viewModel.selectedDate.value ?: getCurrentSimpleDate()
             val action = HomeFragmentDirections.actionHomeFragmentToEditFragment(lastSelectedDate)
             navController.navigate(action)
         }
@@ -71,6 +74,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         setChildFragmentResultListener(HomeFragmentResult.KEY_CALENDAR_ON_CLICK) { _, result ->
             val diaryId = result.get(HomeFragmentResult.KEY_DIARY_ID)
             // do something
+            // 고민되는 부분이다... 클릭된 날짜에 대한 정보를 Home 에서도 갱신해 놓을지...
         }
     }
 

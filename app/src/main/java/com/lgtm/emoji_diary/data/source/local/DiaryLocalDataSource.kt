@@ -8,6 +8,9 @@ import com.lgtm.emoji_diary.data.source.Result.Success
 import java.lang.Exception
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 
 class DiaryLocalDataSource(
@@ -15,12 +18,26 @@ class DiaryLocalDataSource(
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO,
 ) : DiaryDataSource {
 
-    override suspend fun getDiaries(): Result<List<Diary>> = withContext(ioDispatcher) {
+    override fun getDiaries(): Flow<Result<List<Diary>>> {
+        return diaryDao.getDiaries().map {
+            try {
+                Success(it)
+            } catch (e: Exception) {
+                Error(e)
+            }
+        }
+    }
+
+    override suspend fun getDiary(diaryId: Long): Result<Diary> = withContext(ioDispatcher) {
         return@withContext try {
-            Success(diaryDao.getDiaries())
-        } catch (e: Exception) {
+            Success(diaryDao.getDiary(diaryId))
+        } catch(e: Exception) {
             Error(e)
         }
+    }
+
+    override suspend fun insert(diary: Diary) {
+        diaryDao.insert(diary)
     }
 
 }
