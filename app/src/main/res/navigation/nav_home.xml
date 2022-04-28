@@ -39,6 +39,10 @@
         <action
             android:id="@+id/action_detail_fragment_to_edit_fragment"
             app:destination="@id/edit_fragment" />
+        <argument
+            android:name="diaryId"
+            app:argType="long"
+            android:defaultValue="-1L" />
     </fragment>
     <dialog
         android:id="@+id/datePickerFragment"

@@ -13,6 +13,7 @@ import com.lgtm.emoji_diary.databinding.FragmentHomeBinding
 import com.lgtm.emoji_diary.delegate.viewBinding
 import com.lgtm.emoji_diary.utils.CalendarUtil
 import com.lgtm.emoji_diary.utils.setChildFragmentResultListener
+import com.lgtm.emoji_diary.view.detail.DetailFragmentDirections
 import com.lgtm.emoji_diary.view.edit.getCurrentSimpleDate
 import com.lgtm.emoji_diary.view.home.calendar.CalendarFragment
 import com.lgtm.emoji_diary.view.home.timeline.TimelineFragment
@@ -67,15 +68,22 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private fun setupFragmentResultListener() {
         setChildFragmentResultListener(HomeFragmentResult.KEY_TIMELINE_ON_CLICK) { _, result ->
-            val diaryId = result.get(HomeFragmentResult.KEY_DIARY_ID)
-            // do something
+            val diaryId = result.getLong(HomeFragmentResult.KEY_DIARY_ID)
+            // viewModel.onDiaryClick(diaryId)
+            moveToDetailPage(diaryId)
         }
 
         setChildFragmentResultListener(HomeFragmentResult.KEY_CALENDAR_ON_CLICK) { _, result ->
-            val diaryId = result.get(HomeFragmentResult.KEY_DIARY_ID)
+            val diaryId = result.getLong(HomeFragmentResult.KEY_DIARY_ID)
+            // viewModel.onDiaryClick(diaryId)
             // do something
             // 고민되는 부분이다... 클릭된 날짜에 대한 정보를 Home 에서도 갱신해 놓을지...
         }
+    }
+
+    private fun moveToDetailPage(diaryId: Long) {
+        val action = HomeFragmentDirections.actionHomeFragmentToDetailFragment(diaryId)
+        findNavController().navigate(action)
     }
 
 

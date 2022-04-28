@@ -18,5 +18,9 @@ class HomeViewModel @Inject constructor(
     private val _selectedDate: MutableLiveData<SimpleDate> = MutableLiveData(getCurrentSimpleDate())
     val selectedDate: LiveData<SimpleDate>
         get() = _selectedDate
+//
+//    fun onDiaryClick(diaryId: Long) {
+//
+//    }
 
 }

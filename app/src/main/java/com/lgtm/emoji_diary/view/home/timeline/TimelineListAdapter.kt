@@ -34,9 +34,6 @@ class TimelineListAdapter(
             }
 
             binding.titleView.text = diary.title
-
-//            binding.dateView.text = "2022년 12월 24일"
-//            binding.timeView.text = "12 : 00"
         }
 
     }
