@@ -14,7 +14,7 @@ data class SimpleDate(
 ) : Parcelable
 
 fun SimpleDate.asDateFormat(): String {
-    val mm = "$month".padStart(2, '0')
+    val mm = "${month+1}".padStart(2, '0')
     val dd = "$day".padStart(2, '0')
 
     return "$year-$mm-$dd"
@@ -22,7 +22,7 @@ fun SimpleDate.asDateFormat(): String {
 
 fun makeDateFormatToSimpleDate(dateFormat: String): SimpleDate {
     val (year, month, day) = dateFormat.split('-')
-    return SimpleDate(year = year.toInt(), month = month.toInt(), day = day.toInt())
+    return SimpleDate(year = year.toInt(), month = month.toInt()-1, day = day.toInt())
 }
 
 fun SimpleDate.asTimeFormat(): String {
