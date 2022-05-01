@@ -1,12 +1,15 @@
 package com.lgtm.emoji_diary.view.home
 
+import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
+import com.lgtm.emoji_diary.FragmentProvider
 import com.lgtm.emoji_diary.R
 import com.lgtm.emoji_diary.ViewPagerFragmentStateAdapter
 import com.lgtm.emoji_diary.databinding.FragmentHomeBinding
@@ -29,6 +32,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // ViewPager, CalendarView 터치 이벤트 조율
         setupViewPager()
 
         setupNavigation()
@@ -39,8 +43,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private fun setupViewPager() {
         ViewPagerFragmentStateAdapter(
             FRAGMENT_LIST,
-            childFragmentManager,
-            lifecycle
+            this
         ).also {
             binding.viewPager.adapter = it
         }
@@ -51,7 +54,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
         binding.viewPager.registerOnPageChangeCallback(object: ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
-                binding.viewPager.isUserInputEnabled = FRAGMENT_LIST[position] !is CalendarFragment
+                binding.viewPager.isUserInputEnabled = FRAGMENT_LIST[position].provide() !is CalendarFragment
             }
         })
     }
@@ -86,14 +89,15 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         findNavController().navigate(action)
     }
 
-
     companion object {
-        val FRAGMENT_LIST = arrayListOf(
-            CalendarFragment.newInstance(),
-            TimelineFragment.newInstance(),
+        // TODO : need to deep dive
+        // list of fragment instances in companion object can make memory leak...
+        val FRAGMENT_LIST = listOf(
+            FragmentProvider{ CalendarFragment.newInstance() },
+            FragmentProvider{ TimelineFragment.newInstance() },
         )
 
-        val TAB_NAME = arrayListOf(
+        val TAB_NAME = listOf(
             "캘린더",
             "타임라인",
         )

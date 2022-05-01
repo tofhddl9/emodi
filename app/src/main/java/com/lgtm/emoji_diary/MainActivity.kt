@@ -2,10 +2,6 @@ package com.lgtm.emoji_diary
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupWithNavController
-import com.google.android.material.tabs.TabLayoutMediator
 import com.lgtm.emoji_diary.databinding.ActivityMainBinding
 import com.lgtm.emoji_diary.delegate.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
