@@ -1,13 +1,10 @@
 package com.lgtm.emoji_diary.view.edit
 
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.coroutineScope
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -16,7 +13,7 @@ import com.lgtm.emoji_diary.databinding.FragmentEditBinding
 import com.lgtm.emoji_diary.delegate.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
+import timber.log.Timber
 
 @AndroidEntryPoint
 class EditFragment : Fragment(R.layout.fragment_edit) {
@@ -26,6 +23,26 @@ class EditFragment : Fragment(R.layout.fragment_edit) {
     private val viewModel: EditViewModel by viewModels()
 
     private val args: EditFragmentArgs by navArgs()
+
+//    private val titleViewTextWatcher: TextWatcher = object: TextWatcher {
+//        override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+//
+//        override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) { }
+//
+//        override fun afterTextChanged(str: Editable) {
+//            viewModel.onEvent(EditDiaryEvent.TitleChanged(str.toString()))
+//        }
+//    }
+//
+//    private val contentViewTextWatcher: TextWatcher = object: TextWatcher {
+//        override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+//
+//        override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+//
+//        override fun afterTextChanged(str: Editable) {
+//            viewModel.onEvent(EditDiaryEvent.ContentChanged(str.toString()))
+//        }
+//    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -37,11 +54,15 @@ class EditFragment : Fragment(R.layout.fragment_edit) {
         setUiEventListeners()
 
         observeViewModel()
+
+        Timber.d("Edit : ${args.diaryId}")
     }
 
     private fun initViews() {
-        val diaryId = args.diaryId
-        viewModel.onViewCreated(diaryId)
+        binding.lifecycleOwner = viewLifecycleOwner
+        binding.vm = viewModel
+
+        viewModel.loadDiary(args.diaryId)
     }
 
     private fun setFragmentResults() {
@@ -59,26 +80,6 @@ class EditFragment : Fragment(R.layout.fragment_edit) {
     }
 
     private fun setUiEventListeners() {
-        binding.titleView.addTextChangedListener(object: TextWatcher {
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) { }
-
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) { }
-
-            override fun afterTextChanged(str: Editable) {
-                viewModel.onEvent(EditDiaryEvent.TitleChanged(str.toString()))
-            }
-        })
-
-        binding.contentView.addTextChangedListener(object: TextWatcher {
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) { }
-
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) { }
-
-            override fun afterTextChanged(str: Editable) {
-                viewModel.onEvent(EditDiaryEvent.ContentChanged(str.toString()))
-            }
-        })
-
         binding.datePickerIcon.setOnClickListener {
             viewModel.onEvent(EditDiaryEvent.DatePickerClicked())
         }
@@ -94,6 +95,16 @@ class EditFragment : Fragment(R.layout.fragment_edit) {
 
     private fun observeViewModel() {
         viewModel.uiState.observe(viewLifecycleOwner, { uiState ->
+//            binding.titleView.removeTextChangedListener(titleViewTextWatcher)
+//            binding.titleView.setText(uiState.title)
+//            binding.titleView.setSelection(binding.titleView.text.length)
+//            binding.titleView.addTextChangedListener(titleViewTextWatcher)
+//
+//            binding.contentView.removeTextChangedListener(contentViewTextWatcher)
+//            binding.contentView.setText(uiState.content)
+//            binding.contentView.setSelection(binding.contentView.text.length)
+//            binding.contentView.addTextChangedListener(contentViewTextWatcher)
+
             binding.datePickerView.text = uiState.date
             binding.timePickerView.text = uiState.time
         })
@@ -128,8 +139,8 @@ class EditFragment : Fragment(R.layout.fragment_edit) {
         findNavController().navigate(action)
     }
 
-//    private fun moveToDetailFragment() {
-//
-//    }
+    private fun moveToDetailFragment() {
+        // val action = EditFragmentDirections.
+    }
 
 }

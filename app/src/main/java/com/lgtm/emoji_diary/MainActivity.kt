@@ -2,6 +2,7 @@ package com.lgtm.emoji_diary
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MenuItem
 import com.lgtm.emoji_diary.databinding.ActivityMainBinding
 import com.lgtm.emoji_diary.delegate.viewBinding
 import dagger.hilt.android.AndroidEntryPoint

@@ -9,5 +9,9 @@ interface DiaryDataSource {
 
     suspend fun getDiary(diaryId: Long): Result<Diary>
 
-    suspend fun insert(diary: Diary)
+    suspend fun insert(diary: Diary): Long
+
+    suspend fun insertOrUpdate(diary: Diary)
+
+    suspend fun delete(diaryId: Long)
 }

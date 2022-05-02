@@ -11,6 +11,10 @@ import com.lgtm.emoji_diary.view.edit.asTimeFormat
 import com.lgtm.emoji_diary.view.edit.timeInMillisToSimpleDate
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
 @HiltViewModel
@@ -22,7 +26,10 @@ class DetailViewModel @Inject constructor(
     val uiState: LiveData<DetailUiState>
         get() = _uiState
 
-    fun onViewCreated(diaryId: Long) {
+    private val _eventFlow = MutableSharedFlow<DetailDiaryEvent>()
+    val eventFlow = _eventFlow.asSharedFlow()
+
+    fun loadDiary(diaryId: Long) {
         if (diaryId == -1L) {
             _uiState.value = _uiState.value?.copy(loadErrorMessage = "일기를 불러오는데 실패했습니다.")
         } else {
@@ -44,6 +51,23 @@ class DetailViewModel @Inject constructor(
                         _uiState.value = _uiState.value?.copy(loadErrorMessage = "일기를 불러오는데 실패했습니다.")
                     }
                 }
+            }
+        }
+    }
+
+    fun onEvent(event: DetailDiaryEvent) {
+        viewModelScope.launch {
+            _eventFlow.emit(event)
+        }
+
+        when (event) {
+            is DetailDiaryEvent.RemoveDiary -> {
+                viewModelScope.launch {
+                    repository.deleteDiary(event.diaryId)
+                }
+            }
+            else -> {
+
             }
         }
     }

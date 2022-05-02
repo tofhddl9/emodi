@@ -10,4 +10,8 @@ interface DiaryRepository {
     suspend fun getDiary(diaryId: Long): Result<Diary>
 
     suspend fun insertDiary(diary: Diary)
+
+    suspend fun insertOrUpdateDiary(diary: Diary)
+
+    suspend fun deleteDiary(diaryId: Long)
 }

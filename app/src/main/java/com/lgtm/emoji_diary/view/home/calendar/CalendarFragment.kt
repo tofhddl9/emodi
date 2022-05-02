@@ -12,6 +12,7 @@ import com.lgtm.emoji_diary.databinding.FragmentCalendarBinding
 import com.lgtm.emoji_diary.delegate.viewBinding
 import com.lgtm.emoji_diary.utils.CalendarUtil
 import com.lgtm.emoji_diary.view.home.HomeViewModel
+import com.lgtm.emoji_diary.view.home.TabInfo
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -19,7 +20,7 @@ class CalendarFragment : Fragment(R.layout.fragment_calendar), CalendarView.OnCa
 
     private val binding: FragmentCalendarBinding by viewBinding(FragmentCalendarBinding::bind)
 
-    private val viewModel: HomeViewModel by viewModels(ownerProducer = { requireParentFragment() })
+//    private val viewModel: HomeViewModel by viewModels(ownerProducer = { requireParentFragment() })
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -77,7 +78,9 @@ class CalendarFragment : Fragment(R.layout.fragment_calendar), CalendarView.OnCa
     }
 
     companion object {
-        fun newInstance() = CalendarFragment()
+        val TAB_INFO = TabInfo("캘린더") { newInstance() }
+
+        private fun newInstance() = CalendarFragment()
     }
 
 }

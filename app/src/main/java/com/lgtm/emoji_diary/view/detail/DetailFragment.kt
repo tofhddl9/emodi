@@ -1,15 +1,24 @@
 package com.lgtm.emoji_diary.view.detail
 
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.lgtm.emoji_diary.R
 import com.lgtm.emoji_diary.databinding.FragmentDetailBinding
 import com.lgtm.emoji_diary.delegate.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
+import timber.log.Timber
 
 @AndroidEntryPoint
 class DetailFragment : Fragment(R.layout.fragment_detail) {
@@ -23,9 +32,33 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        initToolBar()
+
         observeViewModel()
 
-        viewModel.onViewCreated(args.diaryId)
+        Timber.d("Detail : ${args.diaryId}")
+    }
+
+    private fun initToolBar() = with(binding) {
+        toolBar.inflateMenu(R.menu.menu_detail)
+        toolBar.setOnMenuItemClickListener {
+            when (it.itemId) {
+                R.id.action_edit -> {
+                    viewModel.onEvent(DetailDiaryEvent.EditDiary(args.diaryId))
+                    true
+                }
+                R.id.action_remove -> {
+                    viewModel.onEvent(DetailDiaryEvent.RemoveDiary(args.diaryId))
+                    true
+                }
+                else -> { false }
+            }
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.loadDiary(args.diaryId)
     }
 
     private fun observeViewModel() {
@@ -39,6 +72,35 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
                 Toast.makeText(requireContext(), "에러", Toast.LENGTH_LONG).show()
             }
         }
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.eventFlow.collect { event ->
+                    handleEvent(event)
+                }
+            }
+        }
+    }
+
+    private fun handleEvent(event: DetailDiaryEvent) {
+        when (event) {
+            is DetailDiaryEvent.EditDiary -> {
+                moveToEditPage()
+            }
+            is DetailDiaryEvent.RemoveDiary -> {
+                findNavController().popBackStack()
+            }
+        }
+    }
+
+    private fun moveToEditPage() {
+        val action = DetailFragmentDirections.actionDetailFragmentToEditFragment(diaryId = args.diaryId)
+        findNavController().navigate(action,)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_detail, menu)
+        super.onCreateOptionsMenu(menu, inflater)
     }
 
 }

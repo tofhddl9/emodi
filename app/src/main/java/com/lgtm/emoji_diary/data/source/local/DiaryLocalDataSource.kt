@@ -1,5 +1,6 @@
 package com.lgtm.emoji_diary.data.source.local
 
+import android.util.Log
 import com.lgtm.emoji_diary.data.Diary
 import com.lgtm.emoji_diary.data.source.DiaryDataSource
 import com.lgtm.emoji_diary.data.source.Result
@@ -9,7 +10,6 @@ import java.lang.Exception
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 
@@ -36,8 +36,21 @@ class DiaryLocalDataSource(
         }
     }
 
-    override suspend fun insert(diary: Diary) {
-        diaryDao.insert(diary)
+    override suspend fun insert(diary: Diary): Long {
+        return diaryDao.insert(diary)
+    }
+
+    override suspend fun delete(diaryId: Long) {
+        diaryDao.delete(diaryId)
+    }
+
+    override suspend fun insertOrUpdate(diary: Diary) {
+        val hasDiary = diaryDao.hasDiary(diary.id)
+        if (hasDiary != null) {
+            diaryDao.update(diary)
+        } else {
+            diaryDao.insert(diary)
+        }
     }
 
 }

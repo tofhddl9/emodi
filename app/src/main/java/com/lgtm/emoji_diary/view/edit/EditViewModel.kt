@@ -2,6 +2,7 @@ package com.lgtm.emoji_diary.view.edit
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.lgtm.emoji_diary.data.source.DiaryRepository
@@ -12,6 +13,7 @@ import com.lgtm.emoji_diary.view.edit.validate.ValidateTitle
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
@@ -22,6 +24,7 @@ class EditViewModel @Inject constructor(
     private val repository: DiaryRepository,
     private val validateTitle: ValidateTitle,
     private val validateContent: ValidateContent,
+    private val savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
     private val _uiState = MutableLiveData(EditUiState())
@@ -37,7 +40,7 @@ class EditViewModel @Inject constructor(
     private val _saveAndQuit = MutableSharedFlow<Boolean>()
     val saveAndQuit = _saveAndQuit.asSharedFlow()
 
-    fun onViewCreated(diaryId: Long) {
+    fun loadDiary(diaryId: Long) {
         if (diaryId == -1L) {
             val currentTimeInMillis = CalendarUtil.getCurrentTimeInMills()
             val currentDate = timeInMillisToSimpleDate(currentTimeInMillis)
@@ -94,13 +97,11 @@ class EditViewModel @Inject constructor(
                 // TODO : validate diary form
 
                 viewModelScope.launch(Dispatchers.IO) {
-                    _uiState.value?.mapToDiary()?.let {
-                        repository.insertDiary(it)
+                    val diaryId = savedStateHandle.get<Long>("diaryId") ?: 0L
+                    _uiState.value?.mapToDiary(diaryId)?.let {
+                        repository.insertOrUpdateDiary(it)
+                        _saveAndQuit.emit(true)
                     }
-                }
-
-                viewModelScope.launch {
-                    _saveAndQuit.emit(true)
                 }
             }
         }

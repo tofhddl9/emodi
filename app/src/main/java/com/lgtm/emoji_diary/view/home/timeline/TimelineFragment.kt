@@ -1,6 +1,9 @@
 package com.lgtm.emoji_diary.view.home.timeline
 
 import android.os.Bundle
+import android.util.Log
+import android.view.Menu
+import android.view.MenuInflater
 import android.view.View
 import android.widget.Toast
 import androidx.core.os.bundleOf
@@ -12,6 +15,9 @@ import com.lgtm.emoji_diary.R
 import com.lgtm.emoji_diary.databinding.FragmentTimelineBinding
 import com.lgtm.emoji_diary.delegate.viewBinding
 import com.lgtm.emoji_diary.view.home.HomeFragmentResult
+import com.lgtm.emoji_diary.view.home.HomeViewModel
+import com.lgtm.emoji_diary.view.home.TabInfo
+import com.lgtm.emoji_diary.view.home.calendar.CalendarFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -20,6 +26,8 @@ class TimelineFragment : Fragment(R.layout.fragment_timeline) {
     private val binding: FragmentTimelineBinding by viewBinding(FragmentTimelineBinding::bind)
 
     private val viewModel: TimelineViewModel by viewModels()
+
+//    private val homeViewModel: HomeViewModel by viewModels(ownerProducer = { requireParentFragment() })
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -62,6 +70,8 @@ class TimelineFragment : Fragment(R.layout.fragment_timeline) {
     }
 
     companion object {
-        fun newInstance() = TimelineFragment()
+        val TAB_INFO = TabInfo("타임라인") { newInstance() }
+
+        private fun newInstance() = TimelineFragment()
     }
 }

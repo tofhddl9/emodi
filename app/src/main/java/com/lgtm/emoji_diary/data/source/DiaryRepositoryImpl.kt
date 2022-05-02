@@ -22,4 +22,12 @@ class DiaryRepositoryImpl(
         diaryLocalDataSource.insert(diary)
     }
 
+    override suspend fun insertOrUpdateDiary(diary: Diary) {
+        diaryLocalDataSource.insertOrUpdate(diary)
+    }
+
+    override suspend fun deleteDiary(diaryId: Long) {
+        diaryLocalDataSource.delete(diaryId)
+    }
+
 }
