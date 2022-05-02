@@ -30,10 +30,10 @@ private fun parseToSimpleDate(date: String, time: String): SimpleDate {
     val timeToSimpleDate = makeTimeFormatToSimpleDate(time)
 
     return SimpleDate(
-        dateToSimpleDate.year,
-        dateToSimpleDate.month,
-        dateToSimpleDate.day,
-        timeToSimpleDate.hourOfDay,
-        timeToSimpleDate.minute
+        year = dateToSimpleDate.year,
+        month = dateToSimpleDate.month,
+        day = dateToSimpleDate.day,
+        hourOfDay = timeToSimpleDate.hourOfDay,
+        minute = timeToSimpleDate.minute
     )
 }

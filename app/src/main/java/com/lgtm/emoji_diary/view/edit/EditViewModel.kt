@@ -6,7 +6,7 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.lgtm.emoji_diary.data.source.DiaryRepository
-import com.lgtm.emoji_diary.data.source.Result
+import com.lgtm.emoji_diary.data.Result
 import com.lgtm.emoji_diary.utils.CalendarUtil
 import com.lgtm.emoji_diary.view.edit.validate.ValidateContent
 import com.lgtm.emoji_diary.view.edit.validate.ValidateTitle

@@ -2,6 +2,7 @@ package com.lgtm.emoji_diary.data.source
 
 import com.lgtm.emoji_diary.data.Diary
 import kotlinx.coroutines.flow.Flow
+import com.lgtm.emoji_diary.data.Result
 
 interface DiaryDataSource {
 

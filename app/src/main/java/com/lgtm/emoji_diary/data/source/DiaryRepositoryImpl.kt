@@ -4,6 +4,7 @@ import com.lgtm.emoji_diary.data.Diary
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import com.lgtm.emoji_diary.data.Result
 
 class DiaryRepositoryImpl(
     private val diaryLocalDataSource: DiaryDataSource,

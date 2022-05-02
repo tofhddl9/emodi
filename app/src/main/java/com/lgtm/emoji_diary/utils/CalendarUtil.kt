@@ -9,7 +9,7 @@ private val MONTH_IN_ENGLISH: Array<String> =
         "July", "August", "September", "October", "November", "December")
 
 private val DAY_OF_WEEK_IN_ENGLISH: Array<String> =
-    arrayOf("NONE", "SUN", "MON", "TUE", "WED", "THUR", "FRI", "SAT")
+    arrayOf("NONE", "SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT")
 
 object CalendarUtil {
 

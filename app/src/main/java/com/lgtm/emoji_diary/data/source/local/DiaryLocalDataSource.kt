@@ -1,12 +1,8 @@
 package com.lgtm.emoji_diary.data.source.local
 
-import android.util.Log
 import com.lgtm.emoji_diary.data.Diary
 import com.lgtm.emoji_diary.data.source.DiaryDataSource
-import com.lgtm.emoji_diary.data.source.Result
-import com.lgtm.emoji_diary.data.source.Result.Error
-import com.lgtm.emoji_diary.data.source.Result.Success
-import java.lang.Exception
+import com.lgtm.emoji_diary.data.Result
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -21,18 +17,18 @@ class DiaryLocalDataSource(
     override fun getDiaries(): Flow<Result<List<Diary>>> {
         return diaryDao.getDiaries().map {
             try {
-                Success(it)
+                Result.Success(it)
             } catch (e: Exception) {
-                Error(e)
+                Result.Error(e)
             }
         }
     }
 
     override suspend fun getDiary(diaryId: Long): Result<Diary> = withContext(ioDispatcher) {
         return@withContext try {
-            Success(diaryDao.getDiary(diaryId))
+            Result.Success(diaryDao.getDiary(diaryId))
         } catch(e: Exception) {
-            Error(e)
+            Result.Error(e)
         }
     }
 

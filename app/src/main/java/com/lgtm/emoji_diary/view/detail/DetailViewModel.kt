@@ -5,16 +5,14 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.lgtm.emoji_diary.data.source.DiaryRepository
-import com.lgtm.emoji_diary.data.source.Result
+import com.lgtm.emoji_diary.data.Result
 import com.lgtm.emoji_diary.view.edit.asDateFormat
 import com.lgtm.emoji_diary.view.edit.asTimeFormat
 import com.lgtm.emoji_diary.view.edit.timeInMillisToSimpleDate
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asSharedFlow
-import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
 @HiltViewModel
