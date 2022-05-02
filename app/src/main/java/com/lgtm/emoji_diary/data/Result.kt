@@ -1,4 +1,4 @@
-package com.lgtm.emoji_diary.data.source
+package com.lgtm.emoji_diary.data
 
 sealed class Result<out R> {
 

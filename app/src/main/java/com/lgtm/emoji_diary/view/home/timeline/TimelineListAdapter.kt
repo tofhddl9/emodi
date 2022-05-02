@@ -4,7 +4,6 @@ import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.annotation.ColorInt
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -17,7 +16,6 @@ import com.lgtm.emoji_diary.view.edit.asTimeFormat
 import com.lgtm.emoji_diary.view.edit.isSaturday
 import com.lgtm.emoji_diary.view.edit.isSunday
 import com.lgtm.emoji_diary.view.edit.timeInMillisToSimpleDate
-import timber.log.Timber
 
 class TimelineListAdapter(
     private val itemClickListener: ((Long) -> Unit)? = null
