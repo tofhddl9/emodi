@@ -1,12 +1,23 @@
 package com.lgtm.emoji_diary.view.home.timeline
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.annotation.ColorInt
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.lgtm.emoji_diary.data.Diary
 import com.lgtm.emoji_diary.databinding.ItemTimelineBinding
+import com.lgtm.emoji_diary.utils.CalendarUtil
+import com.lgtm.emoji_diary.view.edit.SimpleDate
+import com.lgtm.emoji_diary.view.edit.asDateFormat
+import com.lgtm.emoji_diary.view.edit.asTimeFormat
+import com.lgtm.emoji_diary.view.edit.isSaturday
+import com.lgtm.emoji_diary.view.edit.isSunday
+import com.lgtm.emoji_diary.view.edit.timeInMillisToSimpleDate
+import timber.log.Timber
 
 class TimelineListAdapter(
     private val itemClickListener: ((Long) -> Unit)? = null
@@ -34,9 +45,36 @@ class TimelineListAdapter(
             }
 
             binding.titleView.text = diary.title
+
+            val simpleDate = timeInMillisToSimpleDate(diary.date)
+            binding.dateView.text = simpleDate.asDateFormat()
+            binding.timeView.text = simpleDate.asTimeFormat()
+
+            binding.dayView.text = simpleDate.day.toString()
+            binding.dayView.setTextColor(simpleDate.getDateColorInt())
+
+            binding.dayOfWeekView.text = CalendarUtil.dayOfWeekInEnglish(simpleDate.dayOfWeek)
+            binding.dayOfWeekView.setTextColor(simpleDate.getDateColorInt())
         }
 
     }
+}
+
+@ColorInt
+private fun SimpleDate.getDateColorInt(): Int {
+    val colorString = when {
+        isSaturday() -> {
+            "#1a40eb"
+        }
+        isSunday() -> {
+            "#eb4431"
+        }
+        else -> {
+            "#212121"
+        }
+    }
+
+    return Color.parseColor(colorString)
 }
 
 private class TimelineDiffCallback : DiffUtil.ItemCallback<Diary>() {

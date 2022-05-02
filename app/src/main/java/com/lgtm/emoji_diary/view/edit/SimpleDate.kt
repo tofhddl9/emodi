@@ -9,6 +9,7 @@ data class SimpleDate(
     val year : Int = 0,
     val month: Int = 0,
     val day: Int = 0,
+    val dayOfWeek: Int = 1,
     val hourOfDay: Int = 0,
     val minute: Int = 0,
 ) : Parcelable
@@ -44,10 +45,15 @@ fun SimpleDate.asTimeInMillis(): Long {
     return calendar.timeInMillis
 }
 
+fun SimpleDate.isSunday() = dayOfWeek == 1
+
+fun SimpleDate.isSaturday() = dayOfWeek == 7
+
 fun Calendar.asSimpleDate() = SimpleDate(
     year = get(Calendar.YEAR),
     month = get(Calendar.MONTH),
     day = get(Calendar.DAY_OF_MONTH),
+    dayOfWeek = get(Calendar.DAY_OF_WEEK),
     hourOfDay = get(Calendar.HOUR_OF_DAY),
     minute = get(Calendar.MINUTE),
 )

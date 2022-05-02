@@ -3,8 +3,8 @@ package com.lgtm.emoji_diary.view.edit
 import com.lgtm.emoji_diary.data.Diary
 
 /**
- *  using var because of 2-way binding
- *  How to handle EditText in MVVM ...?
+ *  using var for using 2-way binding
+ *  TODO : What is the best practice to handle EditText in MVVM ?
  */
 data class EditUiState(
     val diaryId: Long = -1L,
