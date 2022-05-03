@@ -15,6 +15,7 @@ import androidx.navigation.fragment.navArgs
 import com.lgtm.emoji_diary.R
 import com.lgtm.emoji_diary.databinding.FragmentDetailBinding
 import com.lgtm.emoji_diary.delegate.viewBinding
+import com.lgtm.emoji_diary.utils.EmojiStore
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -67,6 +68,7 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
             binding.contentView.text = uiState.content
             binding.dateView.text = uiState.date
             binding.timeView.text = uiState.time
+            binding.emojiView.setImageDrawable(EmojiStore.getEmojiDrawable(requireContext(), uiState.emojiId))
 
             if (uiState.loadErrorMessage.isNotEmpty()) {
                 Toast.makeText(requireContext(), "에러", Toast.LENGTH_LONG).show()

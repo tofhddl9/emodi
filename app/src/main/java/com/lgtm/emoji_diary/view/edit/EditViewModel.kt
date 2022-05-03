@@ -60,6 +60,7 @@ class EditViewModel @Inject constructor(
                             content = result.data.content,
                             date = date.asDateFormat(),
                             time = date.asTimeFormat(),
+                            emojiId = result.data.emojiId,
                         )
                     }
                     is Result.Error -> {

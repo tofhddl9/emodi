@@ -25,7 +25,7 @@
             android:fillViewport="true" >
 
             <ImageView
-                android:id="@+id/emojiPickerView"
+                android:id="@+id/emojiView"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_margin="8dp"
@@ -53,8 +53,9 @@
                 android:layout_marginHorizontal="8dp"
                 app:layout_constraintStart_toEndOf="@id/dateIcon"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/emojiPickerView"
+                app:layout_constraintTop_toBottomOf="@id/emojiView"
                 app:layout_constraintBottom_toTopOf="@id/timeView"
+                android:textColor="@color/black"
                 android:textSize="18sp"
                 tools:text="2022년 04월 27일" />
 
@@ -78,6 +79,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/dateView"
                 app:layout_constraintBottom_toTopOf="@id/titleView"
+                android:textColor="@color/black"
                 android:textSize="14sp"
                 tools:text="14:28" />
 
@@ -87,8 +89,9 @@
                 android:layout_height="wrap_content"
                 android:background="@null"
                 android:hint="제목"
-                android:layout_marginVertical="8dp"
-                android:textSize="16sp"
+                android:layout_marginVertical="12dp"
+                android:textSize="20sp"
+                android:textColor="@color/black"
                 app:layout_constraintHorizontal_bias="0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -103,6 +106,7 @@
                 android:layout_marginVertical="8dp"
                 android:hint="오늘 하루는 어땠나요?"
                 android:textSize="16sp"
+                android:textColor="@color/black"
                 app:layout_constraintHorizontal_bias="0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
