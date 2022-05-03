@@ -1,15 +1,14 @@
 package com.lgtm.emoji_diary.utils
 
 import androidx.annotation.IntRange
-import com.lgtm.emoji_diary.view.edit.SimpleDate
 import java.util.*
 
 private val MONTH_IN_ENGLISH: Array<String> =
     arrayOf("NONE", "January", "February", "March", "April", "May", "June",
         "July", "August", "September", "October", "November", "December")
 
-private val DAY_OF_WEEK_IN_ENGLISH: Array<String> =
-    arrayOf("NONE", "SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT")
+private val DAY_OF_WEEK_IN_KOREAN: Array<String> =
+    arrayOf("NONE", "일", "월", "화", "수", "목", "금", "토")
 
 object CalendarUtil {
 
@@ -18,7 +17,7 @@ object CalendarUtil {
     }
 
     fun dayOfWeekInEnglish(@IntRange(from = 1, to = 7) index: Int): String {
-        return DAY_OF_WEEK_IN_ENGLISH[index]
+        return DAY_OF_WEEK_IN_KOREAN[index]
     }
 
     fun getCurrentTimeInMills(): Long {

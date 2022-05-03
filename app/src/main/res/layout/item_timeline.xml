@@ -40,6 +40,7 @@
         android:textStyle="bold"
         tools:text="13"
         android:layout_marginEnd="4dp"
+        android:includeFontPadding="false"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/dayOfWeekView"
@@ -50,9 +51,10 @@
         android:id="@+id/dayOfWeekView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="14sp"
+        android:textSize="16sp"
         android:textStyle="bold"
         tools:text="금"
+        android:includeFontPadding="false"
         app:layout_constraintStart_toEndOf="@id/dayView"
         app:layout_constraintEnd_toStartOf="@id/dayGuideline"
         app:layout_constraintTop_toTopOf="@id/dayView"
@@ -92,20 +94,34 @@
         app:layout_constraintTop_toBottomOf="@id/dateView"
         app:layout_constraintBottom_toTopOf="@id/timeView"/>
 
+    <ImageView
+        android:id="@+id/timeIcon"
+        android:layout_width="12dp"
+        android:layout_height="12dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginStart="12dp"
+        android:src="@drawable/ic_baseline_access_time_24"
+        android:tint="@color/black"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toEndOf="@id/dayGuideline"
+        app:layout_constraintEnd_toStartOf="@id/timeView"
+        app:layout_constraintTop_toBottomOf="@id/titleView"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
     <TextView
         android:id="@+id/timeView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:layout_marginStart="12dp"
+        android:layout_margin="4dp"
         tools:text="12 : 00"
         android:textSize="11sp"
         android:textColor="@color/black"
         app:layout_constraintHorizontal_bias="0"
-        app:layout_constraintStart_toEndOf="@id/dayGuideline"
+        app:layout_constraintStart_toEndOf="@id/timeIcon"
         app:layout_constraintEnd_toStartOf="@id/imageGuideline"
-        app:layout_constraintTop_toBottomOf="@id/titleView"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintTop_toTopOf="@id/timeIcon"
+        app:layout_constraintBottom_toBottomOf="@id/timeIcon" />
 
     <ImageView
         android:id="@+id/thumbnailView"

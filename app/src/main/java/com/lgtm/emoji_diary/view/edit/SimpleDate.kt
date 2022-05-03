@@ -18,11 +18,11 @@ fun SimpleDate.asDateFormat(): String {
     val mm = "${month+1}".padStart(2, '0')
     val dd = "$day".padStart(2, '0')
 
-    return "$year-$mm-$dd"
+    return "${year}년 ${mm}월 ${dd}일"
 }
 
 fun makeDateFormatToSimpleDate(dateFormat: String): SimpleDate {
-    val (year, month, day) = dateFormat.split('-')
+    val (year, month, day) = dateFormat.replace(" ", "").split('년', '월', '일')
     return SimpleDate(year = year.toInt(), month = month.toInt()-1, day = day.toInt())
 }
 
