@@ -29,7 +29,7 @@ class EmojiPickerFragment : DialogFragment() {
 
     private fun onItemClick(emojiId: Long) {
         setFragmentResult(
-            EditFragmentResult.KEY_EMOJI_ON_CLICK,
+            EditFragmentResult.KEY_EMOJI_PICKER,
             bundleOf(EditFragmentResult.KEY_EMOJI_ID to emojiId)
         )
 

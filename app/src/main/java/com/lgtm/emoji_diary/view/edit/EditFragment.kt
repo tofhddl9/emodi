@@ -25,26 +25,6 @@ class EditFragment : Fragment(R.layout.fragment_edit) {
 
     private val args: EditFragmentArgs by navArgs()
 
-//    private val titleViewTextWatcher: TextWatcher = object: TextWatcher {
-//        override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
-//
-//        override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) { }
-//
-//        override fun afterTextChanged(str: Editable) {
-//            viewModel.onEvent(EditDiaryEvent.TitleChanged(str.toString()))
-//        }
-//    }
-//
-//    private val contentViewTextWatcher: TextWatcher = object: TextWatcher {
-//        override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
-//
-//        override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
-//
-//        override fun afterTextChanged(str: Editable) {
-//            viewModel.onEvent(EditDiaryEvent.ContentChanged(str.toString()))
-//        }
-//    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -67,19 +47,19 @@ class EditFragment : Fragment(R.layout.fragment_edit) {
     }
 
     private fun setFragmentResults() {
-        setFragmentResultListener("KeyDatePicker") { _, result ->
-            result.getParcelable<SimpleDate>("selectedDate")?.let {
+        setFragmentResultListener(EditFragmentResult.KEY_DATE_PICKER) { _, result ->
+            result.getParcelable<SimpleDate>(EditFragmentResult.KEY_SELECTED_DATE)?.let {
                 viewModel.onEvent(EditDiaryEvent.DateChanged(it))
             }
         }
 
-        setFragmentResultListener("KeyTimePicker") { _, result ->
-            result.getParcelable<SimpleDate>("selectedTime")?.let {
+        setFragmentResultListener(EditFragmentResult.KEY_TIME_PICKER) { _, result ->
+            result.getParcelable<SimpleDate>(EditFragmentResult.KEY_SELECTED_TIME)?.let {
                 viewModel.onEvent(EditDiaryEvent.TimeChanged(it))
             }
         }
 
-        setFragmentResultListener(EditFragmentResult.KEY_EMOJI_ON_CLICK) { _, result ->
+        setFragmentResultListener(EditFragmentResult.KEY_EMOJI_PICKER) { _, result ->
             val emojiId = result.getLong(EditFragmentResult.KEY_EMOJI_ID)
             viewModel.onEvent(EditDiaryEvent.EmojiChanged(emojiId))
         }
@@ -106,15 +86,6 @@ class EditFragment : Fragment(R.layout.fragment_edit) {
 
     private fun observeViewModel() {
         viewModel.uiState.observe(viewLifecycleOwner, { uiState ->
-//            binding.titleView.removeTextChangedListener(titleViewTextWatcher)
-//            binding.titleView.setText(uiState.title)
-//            binding.titleView.setSelection(binding.titleView.text.length)
-//            binding.titleView.addTextChangedListener(titleViewTextWatcher)
-//
-//            binding.contentView.removeTextChangedListener(contentViewTextWatcher)
-//            binding.contentView.setText(uiState.content)
-//            binding.contentView.setSelection(binding.contentView.text.length)
-//            binding.contentView.addTextChangedListener(contentViewTextWatcher)
             binding.emojiPickerView.setImageDrawable(EmojiStore.getEmojiDrawable(requireContext(), uiState.emojiId))
             binding.datePickerView.text = uiState.date
             binding.timePickerView.text = uiState.time
@@ -159,10 +130,6 @@ class EditFragment : Fragment(R.layout.fragment_edit) {
     private fun moveToTimePickerFragment(currentDate: SimpleDate) {
         val action = EditFragmentDirections.actionEditFragmentToTimePickerFragment(currentDate)
         findNavController().navigate(action)
-    }
-
-    private fun moveToDetailFragment() {
-        // val action = EditFragmentDirections.
     }
 
 }

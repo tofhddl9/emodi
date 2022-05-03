@@ -7,6 +7,7 @@ import android.widget.DatePicker
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.setFragmentResult
 import androidx.navigation.fragment.navArgs
+import com.lgtm.emoji_diary.view.edit.EditFragmentResult
 import com.lgtm.emoji_diary.view.edit.SimpleDate
 
 class DatePickerFragment : DialogFragment(), DatePickerDialog.OnDateSetListener {
@@ -22,9 +23,9 @@ class DatePickerFragment : DialogFragment(), DatePickerDialog.OnDateSetListener 
     override fun onDateSet(view: DatePicker?, year: Int, month: Int, day: Int) {
         val selectedDate = SimpleDate(year = year, month = month, day = day)
         val bundle = Bundle().apply {
-            putParcelable("selectedDate", selectedDate)
+            putParcelable(EditFragmentResult.KEY_SELECTED_DATE, selectedDate)
         }
-        setFragmentResult("KeyDatePicker", bundle)
+        setFragmentResult(EditFragmentResult.KEY_DATE_PICKER, bundle)
     }
 
     companion object {

@@ -7,6 +7,7 @@ import android.widget.TimePicker
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.setFragmentResult
 import androidx.navigation.fragment.navArgs
+import com.lgtm.emoji_diary.view.edit.EditFragmentResult
 import com.lgtm.emoji_diary.view.edit.SimpleDate
 
 class TimePickerFragment : DialogFragment(), TimePickerDialog.OnTimeSetListener {
@@ -22,9 +23,9 @@ class TimePickerFragment : DialogFragment(), TimePickerDialog.OnTimeSetListener 
     override fun onTimeSet(view: TimePicker?, hour: Int, minute: Int) {
         val selectedDate = SimpleDate(hourOfDay = hour, minute = minute)
         val bundle = Bundle().apply {
-            putParcelable("selectedTime", selectedDate)
+            putParcelable(EditFragmentResult.KEY_SELECTED_TIME, selectedDate)
         }
-        setFragmentResult("KeyTimePicker", bundle)
+        setFragmentResult(EditFragmentResult.KEY_TIME_PICKER, bundle)
     }
 
     companion object {
