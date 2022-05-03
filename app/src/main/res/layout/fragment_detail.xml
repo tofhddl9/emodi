@@ -25,7 +25,7 @@
             android:fillViewport="true" >
 
             <ImageView
-                android:id="@+id/emojiView"
+                android:id="@+id/emojiPickerView"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_margin="8dp"
@@ -53,7 +53,7 @@
                 android:layout_marginHorizontal="8dp"
                 app:layout_constraintStart_toEndOf="@id/dateIcon"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/emojiView"
+                app:layout_constraintTop_toBottomOf="@id/emojiPickerView"
                 app:layout_constraintBottom_toTopOf="@id/timeView"
                 android:textSize="18sp"
                 tools:text="2022년 04월 27일" />

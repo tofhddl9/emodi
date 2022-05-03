@@ -29,6 +29,9 @@ class EditViewModel @Inject constructor(
     val uiState: LiveData<EditUiState>
         get() = _uiState
 
+    private val _emojiPickerClicked = MutableSharedFlow<Boolean>()
+    val emojiPickerClicked = _emojiPickerClicked.asSharedFlow()
+
     private val _datePickerClicked = MutableSharedFlow<SimpleDate>()
     val datePickerClicked = _datePickerClicked.asSharedFlow()
 
@@ -80,6 +83,14 @@ class EditViewModel @Inject constructor(
             }
             is EditDiaryEvent.ContentChanged -> {
                 _uiState.value = _uiState.value?.copy(content = event.content)
+            }
+            is EditDiaryEvent.EmojiChanged -> {
+                _uiState.value = _uiState.value?.copy(emojiId = event.emojiId)
+            }
+            is EditDiaryEvent.EmojiPickerClicked -> {
+                viewModelScope.launch {
+                    _emojiPickerClicked.emit(true)
+                }
             }
             is EditDiaryEvent.DatePickerClicked -> {
                 viewModelScope.launch {

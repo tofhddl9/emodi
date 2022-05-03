@@ -11,6 +11,7 @@ import androidx.navigation.fragment.navArgs
 import com.lgtm.emoji_diary.R
 import com.lgtm.emoji_diary.databinding.FragmentEditBinding
 import com.lgtm.emoji_diary.delegate.viewBinding
+import com.lgtm.emoji_diary.utils.EmojiStore
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import timber.log.Timber
@@ -77,9 +78,19 @@ class EditFragment : Fragment(R.layout.fragment_edit) {
                 viewModel.onEvent(EditDiaryEvent.TimeChanged(it))
             }
         }
+
+        setFragmentResultListener(EditFragmentResult.KEY_EMOJI_ON_CLICK) { _, result ->
+            val emojiId = result.getLong(EditFragmentResult.KEY_EMOJI_ID)
+            viewModel.onEvent(EditDiaryEvent.EmojiChanged(emojiId))
+        }
     }
 
     private fun setUiEventListeners() {
+        binding.emojiPickerView.setOnClickListener {
+            // viewModel.onEvent(EditDiaryEvent.EmojiPickerClicked)
+            moveToEmojiPickerFragment()
+        }
+
         binding.datePickerIcon.setOnClickListener {
             viewModel.onEvent(EditDiaryEvent.DatePickerClicked())
         }
@@ -104,10 +115,16 @@ class EditFragment : Fragment(R.layout.fragment_edit) {
 //            binding.contentView.setText(uiState.content)
 //            binding.contentView.setSelection(binding.contentView.text.length)
 //            binding.contentView.addTextChangedListener(contentViewTextWatcher)
-
+            binding.emojiPickerView.setImageDrawable(EmojiStore.getEmojiDrawable(requireContext(), uiState.emojiId))
             binding.datePickerView.text = uiState.date
             binding.timePickerView.text = uiState.time
         })
+
+        lifecycleScope.launchWhenStarted {
+            viewModel.emojiPickerClicked.collect {
+                moveToEmojiPickerFragment()
+            }
+        }
 
         lifecycleScope.launchWhenStarted {
             viewModel.datePickerClicked.collect {
@@ -127,6 +144,11 @@ class EditFragment : Fragment(R.layout.fragment_edit) {
                 findNavController().popBackStack()
             }
         }
+    }
+
+    private fun moveToEmojiPickerFragment() {
+        val action = EditFragmentDirections.actionEditFragmentToEmojiPickerFragment()
+        findNavController().navigate(action)
     }
 
     private fun moveToDatePickerFragment(currentDate: SimpleDate) {

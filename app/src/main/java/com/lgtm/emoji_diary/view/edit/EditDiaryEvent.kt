@@ -5,7 +5,9 @@ sealed class EditDiaryEvent {
     data class ContentChanged(val content: String) : EditDiaryEvent()
     data class DateChanged(val simpleDate: SimpleDate) : EditDiaryEvent()
     data class TimeChanged(val simpleDate: SimpleDate) : EditDiaryEvent()
+    data class EmojiChanged(val emojiId: Long) : EditDiaryEvent()
 
+    object EmojiPickerClicked : EditDiaryEvent()
     data class DatePickerClicked(
         val date: SimpleDate = getCurrentSimpleDate()
     ) : EditDiaryEvent()

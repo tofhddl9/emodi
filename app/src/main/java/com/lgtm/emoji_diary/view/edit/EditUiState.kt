@@ -14,7 +14,7 @@ data class EditUiState(
     val contentErrorMessage: String? = null,
     val date: String = "",
     val time: String = "",
-    val emojiId: Long = 0,
+    val emojiId: Long = -1L,
 )
 
 fun EditUiState.mapToDiary(id: Long): Diary = Diary(

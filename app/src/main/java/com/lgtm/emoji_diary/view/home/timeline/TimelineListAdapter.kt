@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.lgtm.emoji_diary.data.Diary
 import com.lgtm.emoji_diary.databinding.ItemTimelineBinding
 import com.lgtm.emoji_diary.utils.CalendarUtil
-import com.lgtm.emoji_diary.utils.EmojiMapper
+import com.lgtm.emoji_diary.utils.EmojiStore
 import com.lgtm.emoji_diary.view.edit.SimpleDate
 import com.lgtm.emoji_diary.view.edit.asDateFormat
 import com.lgtm.emoji_diary.view.edit.asTimeFormat
@@ -55,7 +55,7 @@ class TimelineListAdapter(
             binding.dayOfWeekView.text = CalendarUtil.dayOfWeekInEnglish(simpleDate.dayOfWeek)
             binding.dayOfWeekView.setTextColor(simpleDate.getDateColorInt())
 
-            binding.emojiView.setImageDrawable(EmojiMapper.getEmojiDrawable(binding.root.context, diary.emojiId))
+            binding.emojiView.setImageDrawable(EmojiStore.getEmojiDrawable(binding.root.context, diary.emojiId))
         }
 
     }

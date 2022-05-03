@@ -22,7 +22,7 @@
         app:layout_constraintGuide_end="80dp"/>
 
     <ImageView
-        android:id="@+id/emojiView"
+        android:id="@+id/emoji_view"
         android:layout_width="40dp"
         android:layout_height="40dp"
         tools:src="@tools:sample/avatars"
@@ -43,7 +43,7 @@
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/dayOfWeekView"
-        app:layout_constraintTop_toBottomOf="@id/emojiView"
+        app:layout_constraintTop_toBottomOf="@id/emoji_view"
         app:layout_constraintBottom_toBottomOf="parent" />
 
     <TextView

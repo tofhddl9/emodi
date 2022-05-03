@@ -1,4 +1,4 @@
-package com.lgtm.emoji_diary.view.edit
+package com.lgtm.emoji_diary.view.edit.picker
 
 import android.app.DatePickerDialog
 import android.app.Dialog
@@ -7,6 +7,7 @@ import android.widget.DatePicker
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.setFragmentResult
 import androidx.navigation.fragment.navArgs
+import com.lgtm.emoji_diary.view.edit.SimpleDate
 
 class DatePickerFragment : DialogFragment(), DatePickerDialog.OnDateSetListener {
 
