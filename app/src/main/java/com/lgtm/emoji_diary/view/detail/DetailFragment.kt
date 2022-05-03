@@ -71,7 +71,7 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
             binding.emojiView.setImageDrawable(EmojiStore.getEmojiDrawable(requireContext(), uiState.emojiId))
 
             if (uiState.loadErrorMessage.isNotEmpty()) {
-                Toast.makeText(requireContext(), "에러", Toast.LENGTH_LONG).show()
+                Toast.makeText(requireContext(), uiState.loadErrorMessage, Toast.LENGTH_LONG).show()
             }
         }
 

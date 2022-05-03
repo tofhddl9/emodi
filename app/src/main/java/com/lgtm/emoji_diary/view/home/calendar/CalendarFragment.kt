@@ -20,8 +20,6 @@ class CalendarFragment : Fragment(R.layout.fragment_calendar), CalendarView.OnCa
 
     private val binding: FragmentCalendarBinding by viewBinding(FragmentCalendarBinding::bind)
 
-//    private val viewModel: HomeViewModel by viewModels(ownerProducer = { requireParentFragment() })
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
