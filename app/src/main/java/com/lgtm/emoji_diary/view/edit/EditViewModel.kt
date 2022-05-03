@@ -99,6 +99,7 @@ class EditViewModel @Inject constructor(
                     _uiState.value?.mapToDiary(diaryId)?.let {
                         repository.insertOrUpdateDiary(it)
                         _saveAndQuit.emit(true)
+
                     }
                 }
             }
