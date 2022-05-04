@@ -5,7 +5,9 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.lgtm.emoji_diary.R
@@ -14,6 +16,7 @@ import com.lgtm.emoji_diary.delegate.viewBinding
 import com.lgtm.emoji_diary.utils.EmojiStore
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import timber.log.Timber
 
 @AndroidEntryPoint
@@ -43,7 +46,7 @@ class EditFragment : Fragment(R.layout.fragment_edit) {
         binding.lifecycleOwner = viewLifecycleOwner
         binding.vm = viewModel
 
-        viewModel.loadDiary(args.diaryId)
+        viewModel.loadDiary(args.diaryId, args.date)
     }
 
     private fun setFragmentResults() {
@@ -91,28 +94,35 @@ class EditFragment : Fragment(R.layout.fragment_edit) {
             binding.timePickerView.text = uiState.time
         })
 
-        lifecycleScope.launchWhenStarted {
-            viewModel.emojiPickerClicked.collect {
-                moveToEmojiPickerFragment()
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.emojiPickerClicked.collect {
+                    moveToEmojiPickerFragment()
+                }
             }
         }
 
-        lifecycleScope.launchWhenStarted {
-            viewModel.datePickerClicked.collect {
-                moveToDatePickerFragment(it)
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.datePickerClicked.collect {
+                    moveToDatePickerFragment(it)
+                }
             }
         }
 
-        lifecycleScope.launchWhenStarted {
-            viewModel.timePickerClicked.collect {
-                moveToTimePickerFragment(it)
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.timePickerClicked.collect {
+                    moveToTimePickerFragment(it)
+                }
             }
         }
 
-        lifecycleScope.launchWhenStarted {
-            viewModel.saveAndQuit.collect {
-                // moveToDetailFragment()
-                findNavController().popBackStack()
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.saveAndQuit.collect {
+                    findNavController().popBackStack()
+                }
             }
         }
     }

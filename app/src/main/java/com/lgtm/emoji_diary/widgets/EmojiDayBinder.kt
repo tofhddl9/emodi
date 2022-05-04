@@ -11,9 +11,11 @@ import com.kizitonwose.calendarview.ui.DayBinder
 import com.lgtm.emoji_diary.data.Diary
 import com.lgtm.emoji_diary.utils.EmojiStore
 import com.lgtm.emoji_diary.view.edit.SimpleDate
+import com.lgtm.emoji_diary.view.edit.getCurrentSimpleDate
 
 class EmojiDayBinder(
     private val context: Context,
+    private val onItemClicked: ((Long, SimpleDate) -> Unit)? = null,
 ): DayBinder<EmojiDayViewContainer> {
 
     private val emojiMap = mutableMapOf<SimpleDate, Diary>()
@@ -30,9 +32,17 @@ class EmojiDayBinder(
     override fun create(view: View) = EmojiDayViewContainer(view)
 
     override fun bind(container: EmojiDayViewContainer, day: CalendarDay) {
-        val emojiId = emojiMap[day.asSimpleDate()]
+        val diaryInfo = emojiMap[day.asSimpleDate(hourOfDay = 0, minute = 0)]
 
-        emojiId?.also {
+        container.binding.root.setOnClickListener {
+            val currentDate = getCurrentSimpleDate()
+            onItemClicked?.invoke(
+                diaryInfo?.id ?: -1L,
+                day.asSimpleDate(hourOfDay = currentDate.hourOfDay, minute = currentDate.minute)
+            )
+        }
+
+        diaryInfo?.also {
             container.textView.isVisible = false
             container.emojiView.isVisible = true
 
@@ -57,4 +67,11 @@ class EmojiDayBinder(
     }
 }
 
-private fun CalendarDay.asSimpleDate() = SimpleDate(date.year, date.monthValue, date.dayOfMonth)
+private fun CalendarDay.asSimpleDate(
+    year: Int = date.year,
+    month: Int = date.monthValue,
+    dayOfMonth: Int = date.dayOfMonth,
+    dayOfWeek: Int = 1,
+    hourOfDay: Int = 0,
+    minute: Int = 0
+) = SimpleDate(year, month, dayOfMonth, dayOfWeek, hourOfDay, minute)

@@ -15,9 +15,7 @@ import com.lgtm.emoji_diary.R
 import com.lgtm.emoji_diary.databinding.FragmentTimelineBinding
 import com.lgtm.emoji_diary.delegate.viewBinding
 import com.lgtm.emoji_diary.view.home.HomeFragmentResult
-import com.lgtm.emoji_diary.view.home.HomeViewModel
 import com.lgtm.emoji_diary.view.home.TabInfo
-import com.lgtm.emoji_diary.view.home.calendar.CalendarFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

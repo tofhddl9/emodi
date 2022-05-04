@@ -2,7 +2,9 @@ package com.lgtm.emoji_diary.view.home.calendar
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.viewModels
 import com.kizitonwose.calendarview.model.CalendarMonth
 import com.kizitonwose.calendarview.model.InDateStyle
@@ -11,6 +13,8 @@ import com.lgtm.emoji_diary.R
 import com.lgtm.emoji_diary.databinding.FragmentCalendarBinding
 import com.lgtm.emoji_diary.delegate.viewBinding
 import com.lgtm.emoji_diary.utils.CalendarUtil
+import com.lgtm.emoji_diary.view.edit.SimpleDate
+import com.lgtm.emoji_diary.view.home.HomeFragmentResult
 import com.lgtm.emoji_diary.view.home.TabInfo
 import com.lgtm.emoji_diary.widgets.EmojiDayBinder
 import dagger.hilt.android.AndroidEntryPoint
@@ -40,13 +44,11 @@ class CalendarFragment : Fragment(R.layout.fragment_calendar) {
     }
 
     private fun initCalendarView() = with(binding) {
-        calendarView.dayBinder = EmojiDayBinder(requireContext())
+        calendarView.dayBinder = EmojiDayBinder(requireContext(), ::onItemClicked)
 
         calendarView.monthScrollListener = object: MonthScrollListener {
-            override fun invoke(calendarMonth: CalendarMonth) {
-                viewModel.onEvent(DiaryCalendarEvent.ScrollMonth(
-                    calendarMonth.year, calendarMonth.month)
-                )
+            override fun invoke(date: CalendarMonth) {
+                viewModel.onEvent(DiaryCalendarEvent.ScrollMonth(date.year, date.month))
             }
 
         }
@@ -80,6 +82,14 @@ class CalendarFragment : Fragment(R.layout.fragment_calendar) {
     override fun onResume() {
         super.onResume()
         viewModel.getDiaries()
+    }
+
+    private fun onItemClicked(diaryId: Long, date: SimpleDate) {
+        setFragmentResult(
+            HomeFragmentResult.KEY_CALENDAR_ON_CLICK,
+            bundleOf(HomeFragmentResult.KEY_DIARY_ID to diaryId,
+                HomeFragmentResult.KEY_SIMPLE_DATE to date)
+        )
     }
 
     // TODO : add today button for convenient

@@ -41,10 +41,9 @@ class EditViewModel @Inject constructor(
     private val _saveAndQuit = MutableSharedFlow<Boolean>()
     val saveAndQuit = _saveAndQuit.asSharedFlow()
 
-    fun loadDiary(diaryId: Long) {
+    fun loadDiary(diaryId: Long, date: SimpleDate?) {
         if (diaryId == -1L) {
-            val currentTimeInMillis = CalendarUtil.getCurrentTimeInMills()
-            val currentDate = timeInMillisToSimpleDate(currentTimeInMillis)
+            val currentDate = date ?: timeInMillisToSimpleDate(CalendarUtil.getCurrentTimeInMills())
             _uiState.value = _uiState.value?.copy(
                 date = currentDate.asDateFormat(),
                 time = currentDate.asTimeFormat(),

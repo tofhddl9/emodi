@@ -56,6 +56,9 @@ class CalendarViewModel @Inject constructor(
                     month = event.month,
                 )
             }
+            is DiaryCalendarEvent.ClickItem -> {
+
+            }
         }
     }
 

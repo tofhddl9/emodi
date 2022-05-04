@@ -5,4 +5,8 @@ sealed class DiaryCalendarEvent {
         val year: Int,
         val month: Int,
     ) : DiaryCalendarEvent()
+
+    data class ClickItem(
+        val diaryId: Long,
+    ) : DiaryCalendarEvent()
 }
