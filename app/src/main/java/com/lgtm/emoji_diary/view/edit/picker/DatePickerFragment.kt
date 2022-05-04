@@ -17,11 +17,11 @@ class DatePickerFragment : DialogFragment(), DatePickerDialog.OnDateSetListener 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val date = args.date
 
-        return DatePickerDialog(requireContext(), this, date.year, date.month, date.day)
+        return DatePickerDialog(requireContext(), this, date.year, date.month - 1, date.day)
     }
 
     override fun onDateSet(view: DatePicker?, year: Int, month: Int, day: Int) {
-        val selectedDate = SimpleDate(year = year, month = month, day = day)
+        val selectedDate = SimpleDate(year = year, month = month + 1, day = day)
         val bundle = Bundle().apply {
             putParcelable(EditFragmentResult.KEY_SELECTED_DATE, selectedDate)
         }

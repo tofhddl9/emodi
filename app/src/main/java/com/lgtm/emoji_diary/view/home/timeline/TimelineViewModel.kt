@@ -11,6 +11,8 @@ import javax.inject.Inject
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
+const val MAX_COUNT_OF_TIMELINE_DIARY = 100
+
 @HiltViewModel
 class TimelineViewModel @Inject constructor(
     private val diaryRepository: DiaryRepository,
@@ -22,7 +24,7 @@ class TimelineViewModel @Inject constructor(
 
     fun getDiaries() {
         viewModelScope.launch {
-            diaryRepository.getDiaries().collect { result ->
+            diaryRepository.getDiaries(MAX_COUNT_OF_TIMELINE_DIARY).collect { result ->
                 when (result) {
                     is Result.Success -> {
                         _uiState.value = _uiState.value?.copy(
@@ -38,5 +40,4 @@ class TimelineViewModel @Inject constructor(
             }
         }
     }
-
 }

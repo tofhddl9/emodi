@@ -11,8 +11,8 @@ class DiaryRepositoryImpl(
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO,
 ) : DiaryRepository {
 
-    override fun getDiaries(): Flow<Result<List<Diary>>> {
-        return diaryLocalDataSource.getDiaries()
+    override fun getDiaries(count: Int): Flow<Result<List<Diary>>> {
+        return diaryLocalDataSource.getDiaries(count)
     }
 
     override suspend fun getDiary(diaryId: Long): Result<Diary> {

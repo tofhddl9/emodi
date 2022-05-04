@@ -6,7 +6,7 @@ import com.lgtm.emoji_diary.data.Result
 
 interface DiaryRepository {
 
-    fun getDiaries(): Flow<Result<List<Diary>>>
+    fun getDiaries(count: Int = 999): Flow<Result<List<Diary>>>
 
     suspend fun getDiary(diaryId: Long): Result<Diary>
 

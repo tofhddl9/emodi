@@ -12,7 +12,7 @@ android {
 
     defaultConfig {
         applicationId "com.lgtm.emoji_diary"
-        minSdk 23
+        minSdk 26
         targetSdk 31
         versionCode 1
         versionName "1.0"
@@ -79,9 +79,9 @@ dependencies {
 
     debugImplementation "com.jakewharton.timber:timber:$rootProject.timberVersion"
 
-    implementation "com.haibin:calendarview:$rootProject.calendarViewVersion"
+//    implementation "com.haibin:calendarview:$rootProject.calendarViewVersion"
 //    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.1.5'
-//    implementation 'com.github.kizitonwose:CalendarView:1.0.4'
+    implementation 'com.github.kizitonwose:CalendarView:1.0.4'
 
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'

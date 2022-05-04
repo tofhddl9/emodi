@@ -1,5 +1,6 @@
 package com.lgtm.emoji_diary.view.edit
 
+import android.annotation.SuppressLint
 import com.lgtm.emoji_diary.data.Diary
 
 /**
@@ -25,13 +26,14 @@ fun EditUiState.mapToDiary(id: Long): Diary = Diary(
     emojiId = emojiId,
 )
 
+@SuppressLint("Range")
 private fun parseToSimpleDate(date: String, time: String): SimpleDate {
     val dateToSimpleDate = makeDateFormatToSimpleDate(date)
     val timeToSimpleDate = makeTimeFormatToSimpleDate(time)
 
     return SimpleDate(
         year = dateToSimpleDate.year,
-        month = dateToSimpleDate.month,
+        month = dateToSimpleDate.month - 1,
         day = dateToSimpleDate.day,
         hourOfDay = timeToSimpleDate.hourOfDay,
         minute = timeToSimpleDate.minute

@@ -15,8 +15,8 @@ interface DiaryDao {
     @Query("SELECT * from diary WHERE id= :diaryId")
     suspend fun hasDiary(diaryId: Long): Diary?
 
-    @Query("SELECT * FROM Diary ORDER BY date DESC")
-    fun getDiaries(): Flow<List<Diary>>
+    @Query("SELECT * FROM Diary ORDER BY date DESC LIMIT :count")
+    fun getDiaries(count: Int): Flow<List<Diary>>
 
     @Query("SELECT * FROM Diary WHERE id = :diaryId")
     suspend fun getDiary(diaryId: Long): Diary

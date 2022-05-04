@@ -53,12 +53,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             tab.text = tabInfoList[position].tabName
         }.attach()
 
-        binding.viewPager.registerOnPageChangeCallback(object: ViewPager2.OnPageChangeCallback() {
-            override fun onPageSelected(position: Int) {
-                // TODO : Adjust touch event
-                binding.viewPager.isUserInputEnabled = tabInfoList[position].fragmentProvider.provide() !is CalendarFragment
-            }
-        })
     }
 
     private fun setupNavigation() {

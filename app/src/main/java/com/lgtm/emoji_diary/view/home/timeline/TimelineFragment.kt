@@ -27,8 +27,6 @@ class TimelineFragment : Fragment(R.layout.fragment_timeline) {
 
     private val viewModel: TimelineViewModel by viewModels()
 
-//    private val homeViewModel: HomeViewModel by viewModels(ownerProducer = { requireParentFragment() })
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 

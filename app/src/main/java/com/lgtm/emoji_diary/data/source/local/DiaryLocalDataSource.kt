@@ -14,8 +14,8 @@ class DiaryLocalDataSource(
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO,
 ) : DiaryDataSource {
 
-    override fun getDiaries(): Flow<Result<List<Diary>>> {
-        return diaryDao.getDiaries().map {
+    override fun getDiaries(count: Int): Flow<Result<List<Diary>>> {
+        return diaryDao.getDiaries(count).map {
             try {
                 Result.Success(it)
             } catch (e: Exception) {
