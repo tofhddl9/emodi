@@ -2,6 +2,7 @@
     <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="colorPrimary">@color/darkorange</item>
         <item name="colorPrimaryDark">@color/darkorange</item>
+        <item name="android:fontFamily">@font/font</item>
 <!--        <item name="android:navigationBarColor">@color/lavender</item>-->
 <!--        <item name="background">@color/white</item>-->
     </style>

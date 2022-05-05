@@ -1,5 +1,6 @@
 package com.lgtm.emoji_diary.view.home.timeline
 
+import android.content.Context
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -7,6 +8,7 @@ import androidx.annotation.ColorInt
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.lgtm.emoji_diary.R
 import com.lgtm.emoji_diary.data.Diary
 import com.lgtm.emoji_diary.databinding.ItemTimelineBinding
 import com.lgtm.emoji_diary.utils.CalendarUtil
@@ -50,28 +52,28 @@ class TimelineListAdapter(
             binding.timeView.text = simpleDate.asTimeFormat()
 
             binding.dayView.text = simpleDate.day.toString()
-            binding.dayView.setTextColor(simpleDate.getDateColorInt())
+            binding.dayView.setTextColor(simpleDate.getDateColorInt(binding.dayView.context))
 
             binding.dayOfWeekView.text = CalendarUtil.dayOfWeekInEnglish(simpleDate.dayOfWeek)
-            binding.dayOfWeekView.setTextColor(simpleDate.getDateColorInt())
+            binding.dayOfWeekView.setTextColor(simpleDate.getDateColorInt(binding.dayView.context))
 
-            binding.emojiView.setImageDrawable(EmojiStore.getEmojiDrawable(binding.root.context, diary.emojiId))
+            binding.emojiView.setImageDrawable(EmojiStore.getEmojiDrawable(binding.emojiView.context, diary.emojiId))
         }
 
     }
 }
 
 @ColorInt
-private fun SimpleDate.getDateColorInt(): Int {
+private fun SimpleDate.getDateColorInt(context: Context): Int {
     val colorString = when {
         isSaturday() -> {
-            "#1a40eb"
+            context.resources.getString(0 + R.color.saturday_blue)
         }
         isSunday() -> {
-            "#eb4431"
+            context.resources.getString(0 + R.color.sunday_red)
         }
         else -> {
-            "#212121"
+            context.resources.getString(0 + R.color.grey_black)
         }
     }
 
