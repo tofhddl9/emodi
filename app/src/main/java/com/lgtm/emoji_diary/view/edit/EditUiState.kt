@@ -14,6 +14,7 @@ data class EditUiState(
     var content: String = "",
     val contentErrorMessage: String? = null,
     val date: String = "",
+    val datePickerEnabled: Boolean = true,
     val time: String = "",
     val emojiId: Long = -1L,
 )

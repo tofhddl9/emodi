@@ -58,6 +58,7 @@ class EditViewModel @Inject constructor(
                             title = result.data.title,
                             content = result.data.content,
                             date = date.asDateFormat(),
+                            datePickerEnabled = diaryId == -1L,
                             time = date.asTimeFormat(),
                             emojiId = result.data.emojiId,
                         )

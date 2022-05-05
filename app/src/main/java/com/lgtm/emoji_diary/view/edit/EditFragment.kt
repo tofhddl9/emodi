@@ -1,7 +1,10 @@
 package com.lgtm.emoji_diary.view.edit
 
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
@@ -92,6 +95,12 @@ class EditFragment : Fragment(R.layout.fragment_edit) {
             binding.emojiPickerView.setImageDrawable(EmojiStore.getEmojiDrawable(requireContext(), uiState.emojiId))
             binding.datePickerView.text = uiState.date
             binding.timePickerView.text = uiState.time
+
+            if (!uiState.datePickerEnabled) {
+                binding.datePickerIcon.setOnClickListener(null)
+                binding.datePickerView.setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
+                binding.datePickerIcon.imageTintList = ColorStateList.valueOf(ContextCompat.getColor(requireContext(), R.color.black))
+            }
         })
 
         viewLifecycleOwner.lifecycleScope.launch {

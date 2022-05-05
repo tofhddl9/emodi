@@ -87,7 +87,7 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
     private fun handleEvent(event: DetailDiaryEvent) {
         when (event) {
             is DetailDiaryEvent.EditDiary -> {
-                moveToEditPage()
+                moveToEditPage(event.diaryId)
             }
             is DetailDiaryEvent.RemoveDiary -> {
                 findNavController().popBackStack()
@@ -95,9 +95,9 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
         }
     }
 
-    private fun moveToEditPage() {
-        val action = DetailFragmentDirections.actionDetailFragmentToEditFragment(diaryId = args.diaryId)
-        findNavController().navigate(action,)
+    private fun moveToEditPage(diaryId: Long) {
+        val action = DetailFragmentDirections.actionDetailFragmentToEditFragment(diaryId = diaryId)
+        findNavController().navigate(action, )
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
