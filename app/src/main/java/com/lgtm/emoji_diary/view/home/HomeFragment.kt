@@ -10,9 +10,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
-import com.lgtm.emoji_diary.FragmentProvider
 import com.lgtm.emoji_diary.R
-import com.lgtm.emoji_diary.ViewPagerFragmentStateAdapter
 import com.lgtm.emoji_diary.databinding.FragmentHomeBinding
 import com.lgtm.emoji_diary.delegate.viewBinding
 import com.lgtm.emoji_diary.utils.setChildFragmentResultListener
@@ -21,9 +19,11 @@ import com.lgtm.emoji_diary.view.edit.getCurrentSimpleDate
 import com.lgtm.emoji_diary.view.home.calendar.CalendarFragment
 import com.lgtm.emoji_diary.view.home.timeline.TimelineFragment
 import dagger.hilt.android.AndroidEntryPoint
-import java.text.SimpleDateFormat
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+
+
+
 
 @AndroidEntryPoint
 class HomeFragment : Fragment(R.layout.fragment_home) {
@@ -61,6 +61,38 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
             tab.text = tabInfoList[position].tabName
         }.attach()
+
+        // TODO : CODE SMELL ... HomeFragment 를 제거하는건 어떨까?
+        binding.viewPager.registerOnPageChangeCallback(object: ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                binding.toolBar.menu.clear()
+                if (position == 0) {
+                    binding.toolBar.inflateMenu(R.menu.menu_calendar)
+                    binding.toolBar.setOnMenuItemClickListener { menuItem ->
+                        when (menuItem.itemId) {
+                            R.id.action_today -> {
+                                val fragment = (binding.viewPager.adapter as ViewPagerFragmentStateAdapter).fragmentMap[position]
+                                (fragment as? CalendarFragment)?.moveToToday()
+                                return@setOnMenuItemClickListener true
+                            }
+                            else -> return@setOnMenuItemClickListener false
+                        }
+                    }
+                } else {
+                    binding.toolBar.inflateMenu(R.menu.menu_timeline)
+                    binding.toolBar.setOnMenuItemClickListener { menuItem ->
+                        when (menuItem.itemId) {
+                            R.id.action_search -> {
+
+                                return@setOnMenuItemClickListener true
+                            }
+                            else -> return@setOnMenuItemClickListener false
+                        }
+                    }
+                }
+
+            }
+        })
 
     }
 

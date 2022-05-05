@@ -15,10 +15,9 @@
         app:layout_constraintBottom_toTopOf="@id/tab_layout">
 
         <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/tool_bar"
             android:layout_width="match_parent"
-            android:layout_height="56dp"
-            app:title="Sample"
-            app:titleTextColor="#ffffff" />
+            android:layout_height="56dp"/>
 
     </com.google.android.material.appbar.AppBarLayout>
 

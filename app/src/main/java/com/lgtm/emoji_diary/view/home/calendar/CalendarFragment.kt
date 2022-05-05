@@ -92,20 +92,10 @@ class CalendarFragment : Fragment(R.layout.fragment_calendar) {
         )
     }
 
-    // TODO : add today button for convenient
-    private fun moveToToday() {
+    // TODO : make private after refactoring HomeFragment
+    fun moveToToday() {
         val currentMonth = YearMonth.now()
-        val firstMonth = currentMonth.minusMonths(240) // past 20 year
-        val lastMonth = currentMonth.plusMonths(12) // future 1 year
-        val firstDayOfWeek = WeekFields.of(Locale.getDefault()).firstDayOfWeek
-
-        // viewModel.event()
-
-//        binding.yearView.text = currentMonth.year.toString()
-//        binding.monthView.text = CalendarUtil.monthInEnglish(currentMonth.monthValue)
-//
-//        binding.calendarView.setup(firstMonth, lastMonth, firstDayOfWeek)
-//        binding.calendarView.scrollToMonth(currentMonth)
+        binding.calendarView.smoothScrollToMonth(currentMonth)
     }
 
     companion object {
