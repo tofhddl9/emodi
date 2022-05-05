@@ -1,7 +1,6 @@
 package com.lgtm.emoji_diary.view.edit
 
 import android.content.res.ColorStateList
-import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import androidx.core.content.ContextCompat
@@ -74,8 +73,7 @@ class EditFragment : Fragment(R.layout.fragment_edit) {
 
     private fun setUiEventListeners() {
         binding.emojiPickerView.setOnClickListener {
-            // viewModel.onEvent(EditDiaryEvent.EmojiPickerClicked)
-            moveToEmojiPickerFragment()
+            viewModel.onEvent(EditDiaryEvent.EmojiPickerClicked)
         }
 
         binding.datePickerIcon.setOnClickListener {
