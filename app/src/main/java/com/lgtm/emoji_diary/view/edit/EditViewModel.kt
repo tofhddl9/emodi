@@ -9,19 +9,23 @@ import com.lgtm.emoji_diary.data.source.DiaryRepository
 import com.lgtm.emoji_diary.data.Result
 import com.lgtm.emoji_diary.utils.CalendarUtil
 import com.lgtm.emoji_diary.view.edit.validate.ValidateContent
+import com.lgtm.emoji_diary.view.edit.validate.ValidateEmoji
 import com.lgtm.emoji_diary.view.edit.validate.ValidateTitle
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 
 @HiltViewModel
 class EditViewModel @Inject constructor(
     private val repository: DiaryRepository,
-    private val validateTitle: ValidateTitle,
-    private val validateContent: ValidateContent,
+//    private val validateTitle: ValidateTitle,
+//    private val validateContent: ValidateContent,
+    private val validateEmoji: ValidateEmoji,
     private val savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
@@ -43,6 +47,9 @@ class EditViewModel @Inject constructor(
 
     private val _saveAndQuit = MutableSharedFlow<Boolean>()
     val saveAndQuit = _saveAndQuit.asSharedFlow()
+
+    private val validationEventChannel = Channel<ValidationEvent>()
+    val validationEvents = validationEventChannel.receiveAsFlow()
 
     fun loadDiary(diaryId: Long, date: SimpleDate?) {
         if (diaryId == -1L) {
@@ -113,16 +120,39 @@ class EditViewModel @Inject constructor(
             }
             is EditDiaryEvent.Save -> {
                 // TODO : validate diary form
-
-                viewModelScope.launch(Dispatchers.IO) {
-                    val diaryId = savedStateHandle.get<Long>("diaryId") ?: 0L
-                    _uiState.value?.mapToDiary(diaryId)?.let {
-                        repository.insertOrUpdateDiary(it)
-                        _saveAndQuit.emit(true)
-
-                    }
-                }
+                saveDiary()
             }
         }
+    }
+
+    private fun saveDiary() {
+        val emojiResult = validateEmoji.invoke(_uiState.value!!.emojiId) // change to stateflow
+
+        val hasError = listOf(
+            emojiResult,
+        ).any { !it.successful }
+
+        if (hasError) {
+            _uiState.value = _uiState.value!!.copy(
+                emojiErrorMessage = emojiResult.errorMessage
+            )
+            return
+        }
+        viewModelScope.launch {
+            validationEventChannel.send(ValidationEvent.Success)
+        }
+
+        viewModelScope.launch(Dispatchers.IO) {
+            val diaryId = savedStateHandle.get<Long>("diaryId") ?: 0L
+            _uiState.value?.mapToDiary(diaryId)?.let {
+                repository.insertOrUpdateDiary(it)
+                _saveAndQuit.emit(true)
+
+            }
+        }
+    }
+
+    sealed class ValidationEvent {
+        object Success : ValidationEvent()
     }
 }

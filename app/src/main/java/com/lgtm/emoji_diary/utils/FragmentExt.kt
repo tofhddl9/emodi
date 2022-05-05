@@ -26,6 +26,6 @@ fun FragmentActivity.setFragmentResultListener(
     supportFragmentManager.setFragmentResultListener(requestKey, this, listener)
 }
 
-fun Fragment.showSnackBar(msg:String){
-    Snackbar.make(requireActivity().findViewById(android.R.id.content), msg, Snackbar.LENGTH_SHORT).show()
+fun Fragment.showSnackBar(msg:String, duration: Int = Snackbar.LENGTH_SHORT) {
+    Snackbar.make(requireActivity().findViewById(android.R.id.content), msg, duration).show()
 }

@@ -12,6 +12,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.google.android.material.snackbar.Snackbar
 import com.lgtm.emoji_diary.R
 import com.lgtm.emoji_diary.databinding.FragmentEditBinding
 import com.lgtm.emoji_diary.delegate.viewBinding
@@ -142,6 +143,14 @@ class EditFragment : Fragment(R.layout.fragment_edit) {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.saveAndQuit.collect {
                     findNavController().popBackStack()
+                }
+            }
+        }
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.validationEvents.collect {
+                    showSnackBar("고생 많았어요 :)", Snackbar.LENGTH_LONG)
                 }
             }
         }

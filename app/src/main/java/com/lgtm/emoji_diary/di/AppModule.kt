@@ -8,6 +8,7 @@ import com.lgtm.emoji_diary.data.source.DiaryRepositoryImpl
 import com.lgtm.emoji_diary.data.source.local.DiaryDatabase
 import com.lgtm.emoji_diary.data.source.local.DiaryLocalDataSource
 import com.lgtm.emoji_diary.view.edit.validate.ValidateContent
+import com.lgtm.emoji_diary.view.edit.validate.ValidateEmoji
 import com.lgtm.emoji_diary.view.edit.validate.ValidateTitle
 import dagger.Module
 import dagger.Provides
@@ -66,5 +67,8 @@ object EditViewModelModule {
 
     @Provides
     fun provideValidateContent(): ValidateContent = ValidateContent()
+
+    @Provides
+    fun provideValidateEmoji(): ValidateEmoji = ValidateEmoji()
 
 }

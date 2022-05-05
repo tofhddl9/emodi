@@ -17,6 +17,7 @@ data class EditUiState(
     val datePickerEnabled: Boolean = true,
     val time: String = "",
     val emojiId: Long = -1L,
+    val emojiErrorMessage: String? = null,
 )
 
 fun EditUiState.mapToDiary(id: Long): Diary = Diary(
