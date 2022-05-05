@@ -126,7 +126,7 @@
         android:background="#eeeeee">
 
         <ImageView
-            android:id="@+id/imagePickerButton"
+            android:id="@+id/imagePickerIcon"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:src="@drawable/ic_baseline_image_24"

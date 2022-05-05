@@ -14,6 +14,7 @@ import com.lgtm.emoji_diary.R
 import com.lgtm.emoji_diary.databinding.FragmentHomeBinding
 import com.lgtm.emoji_diary.delegate.viewBinding
 import com.lgtm.emoji_diary.utils.setChildFragmentResultListener
+import com.lgtm.emoji_diary.utils.showSnackBar
 import com.lgtm.emoji_diary.view.edit.SimpleDate
 import com.lgtm.emoji_diary.view.edit.getCurrentSimpleDate
 import com.lgtm.emoji_diary.view.home.calendar.CalendarFragment
@@ -83,7 +84,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                     binding.toolBar.setOnMenuItemClickListener { menuItem ->
                         when (menuItem.itemId) {
                             R.id.action_search -> {
-
+                                showSnackBar("아직 지원하지 않는 기능입니다 :(")
                                 return@setOnMenuItemClickListener true
                             }
                             else -> return@setOnMenuItemClickListener false

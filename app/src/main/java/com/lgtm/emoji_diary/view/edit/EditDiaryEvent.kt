@@ -15,5 +15,6 @@ sealed class EditDiaryEvent {
         val date: SimpleDate = getCurrentSimpleDate()
     ) : EditDiaryEvent()
 
+    object ImagePickerClicked : EditDiaryEvent()
     object Save : EditDiaryEvent()
 }

@@ -1,8 +1,10 @@
 package com.lgtm.emoji_diary.utils
 
+import android.app.Activity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
+import com.google.android.material.snackbar.Snackbar
 
 /**
  * 출처 : https://pluu.github.io/blog/android/2020/05/04/fragment-result/
@@ -22,4 +24,8 @@ fun FragmentActivity.setFragmentResultListener(
     listener: ((resultKey: String, bundle: Bundle) -> Unit)
 ) {
     supportFragmentManager.setFragmentResultListener(requestKey, this, listener)
+}
+
+fun Fragment.showSnackBar(msg:String){
+    Snackbar.make(requireActivity().findViewById(android.R.id.content), msg, Snackbar.LENGTH_SHORT).show()
 }

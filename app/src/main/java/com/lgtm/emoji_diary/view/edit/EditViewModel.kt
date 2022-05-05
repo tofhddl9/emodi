@@ -38,6 +38,9 @@ class EditViewModel @Inject constructor(
     private val _timePickerClicked = MutableSharedFlow<SimpleDate>()
     val timePickerClicked = _timePickerClicked.asSharedFlow()
 
+    private val _imagePickerClicked = MutableSharedFlow<Boolean>()
+    val imagePickerClicked = _imagePickerClicked.asSharedFlow()
+
     private val _saveAndQuit = MutableSharedFlow<Boolean>()
     val saveAndQuit = _saveAndQuit.asSharedFlow()
 
@@ -101,6 +104,11 @@ class EditViewModel @Inject constructor(
             is EditDiaryEvent.TimePickerClicked -> {
                 viewModelScope.launch {
                     _timePickerClicked.emit(event.date)
+                }
+            }
+            is EditDiaryEvent.ImagePickerClicked -> {
+                viewModelScope.launch {
+                    _imagePickerClicked.emit(true)
                 }
             }
             is EditDiaryEvent.Save -> {

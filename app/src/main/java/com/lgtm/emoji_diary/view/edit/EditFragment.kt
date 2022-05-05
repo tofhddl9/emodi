@@ -17,6 +17,7 @@ import com.lgtm.emoji_diary.R
 import com.lgtm.emoji_diary.databinding.FragmentEditBinding
 import com.lgtm.emoji_diary.delegate.viewBinding
 import com.lgtm.emoji_diary.utils.EmojiStore
+import com.lgtm.emoji_diary.utils.showSnackBar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -85,6 +86,10 @@ class EditFragment : Fragment(R.layout.fragment_edit) {
             viewModel.onEvent(EditDiaryEvent.TimePickerClicked())
         }
 
+        binding.imagePickerIcon.setOnClickListener {
+            viewModel.onEvent(EditDiaryEvent.ImagePickerClicked)
+        }
+
         binding.saveButton.setOnClickListener {
             viewModel.onEvent(EditDiaryEvent.Save)
         }
@@ -123,6 +128,14 @@ class EditFragment : Fragment(R.layout.fragment_edit) {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.timePickerClicked.collect {
                     moveToTimePickerFragment(it)
+                }
+            }
+        }
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.imagePickerClicked.collect {
+                    showSnackBar("아직 지원하지 않는 기능입니다 :(")
                 }
             }
         }
