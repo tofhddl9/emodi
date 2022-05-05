@@ -34,6 +34,8 @@ class EditFragment : Fragment(R.layout.fragment_edit) {
 
     private val args: EditFragmentArgs by navArgs()
 
+    private var toolTip: SimpleTooltip? = null
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -109,14 +111,15 @@ class EditFragment : Fragment(R.layout.fragment_edit) {
             }
 
             if (uiState.emojiErrorMessage != null) {
-                SimpleTooltip.Builder(requireContext())
+                toolTip = SimpleTooltip.Builder(requireContext())
                     .anchorView(binding.emojiPickerView)
                     .text("이날의 감정을 선택해주세요.")
                     .gravity(Gravity.BOTTOM)
                     .animated(true)
                     .transparentOverlay(false)
                     .build()
-                    .show()
+
+                toolTip?.show()
             }
         })
 
@@ -182,6 +185,12 @@ class EditFragment : Fragment(R.layout.fragment_edit) {
     private fun moveToTimePickerFragment(currentDate: SimpleDate) {
         val action = EditFragmentDirections.actionEditFragmentToTimePickerFragment(currentDate)
         findNavController().navigate(action)
+    }
+
+    override fun onDestroyView() {
+        toolTip?.dismiss()
+        toolTip = null
+        super.onDestroyView()
     }
 
 }
