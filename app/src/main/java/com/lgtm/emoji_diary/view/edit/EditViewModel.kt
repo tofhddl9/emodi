@@ -100,6 +100,8 @@ class EditViewModel @Inject constructor(
             }
             is EditDiaryEvent.EmojiPickerClicked -> {
                 viewModelScope.launch {
+                    // TODO : may remove after migrate livedata -> sharedFlow
+                    _uiState.value = _uiState.value?.copy(emojiErrorMessage = null)
                     _emojiPickerClicked.emit(true)
                 }
             }
@@ -147,7 +149,6 @@ class EditViewModel @Inject constructor(
             _uiState.value?.mapToDiary(diaryId)?.let {
                 repository.insertOrUpdateDiary(it)
                 _saveAndQuit.emit(true)
-
             }
         }
     }

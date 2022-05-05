@@ -2,6 +2,7 @@ package com.lgtm.emoji_diary.view.edit
 
 import android.content.res.ColorStateList
 import android.os.Bundle
+import android.view.Gravity
 import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -19,6 +20,7 @@ import com.lgtm.emoji_diary.delegate.viewBinding
 import com.lgtm.emoji_diary.utils.EmojiStore
 import com.lgtm.emoji_diary.utils.showSnackBar
 import dagger.hilt.android.AndroidEntryPoint
+import io.github.douglasjunior.androidSimpleTooltip.SimpleTooltip
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -104,6 +106,17 @@ class EditFragment : Fragment(R.layout.fragment_edit) {
                 binding.datePickerIcon.setOnClickListener(null)
                 binding.datePickerView.setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
                 binding.datePickerIcon.imageTintList = ColorStateList.valueOf(ContextCompat.getColor(requireContext(), R.color.black))
+            }
+
+            if (uiState.emojiErrorMessage != null) {
+                SimpleTooltip.Builder(requireContext())
+                    .anchorView(binding.emojiPickerView)
+                    .text("이날의 감정을 선택해주세요.")
+                    .gravity(Gravity.BOTTOM)
+                    .animated(true)
+                    .transparentOverlay(false)
+                    .build()
+                    .show()
             }
         })
 
