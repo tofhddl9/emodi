@@ -1,13 +1,14 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <item name="colorPrimary">@color/black</item>
-        <item name="colorPrimaryDark">@color/black</item>
-        <item name="android:navigationBarColor">@color/black</item>
+        <item name="colorPrimary">@color/darkorange</item>
+        <item name="colorPrimaryDark">@color/darkorange</item>
+        <item name="android:navigationBarColor">@color/darkorange</item>
         <item name="background">@color/white</item>
     </style>
 
     <style name="AppTheme.Black" parent="AppTheme">
-        <item name="background">@color/black</item>
+        <item name="background">@color/darkorange</item>
     </style>
+
 </resources>
