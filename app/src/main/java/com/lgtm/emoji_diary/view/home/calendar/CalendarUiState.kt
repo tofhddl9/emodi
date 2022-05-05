@@ -9,8 +9,3 @@ data class CalendarUiState(
     val calendarEmojiMap: Map<SimpleDate, Diary> = mapOf(),
     val loadErrorMessage: String? = null,
 )
-
-// Y-M-D 날짜를 구해서 Calendar 의 리스트를 관리
-// 이걸 캘린더뷰에 넘겨줌
-
-// onResume 때마다 리프레시

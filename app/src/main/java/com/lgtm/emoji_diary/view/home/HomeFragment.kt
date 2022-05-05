@@ -23,9 +23,6 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
-
-
-
 @AndroidEntryPoint
 class HomeFragment : Fragment(R.layout.fragment_home) {
 
@@ -38,10 +35,15 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         TimelineFragment.TAB_INFO,
     )
 
+    private val viewPagerAdapter by lazy { ViewPagerFragmentStateAdapter(
+            tabInfoList.map { it.fragmentProvider },
+            this
+        )
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // ViewPager, CalendarView 터치 이벤트 조율
         setupViewPager()
 
         setupNavigation()
@@ -52,12 +54,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     }
 
     private fun setupViewPager() {
-        ViewPagerFragmentStateAdapter(
-            tabInfoList.map { it.fragmentProvider },
-            this
-        ).also {
-            binding.viewPager.adapter = it
-        }
+        binding.viewPager.adapter = viewPagerAdapter
 
         TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
             tab.text = tabInfoList[position].tabName
@@ -126,7 +123,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         setChildFragmentResultListener(HomeFragmentResult.KEY_TIMELINE_ON_CLICK) { _, result ->
             val diaryId = result.getLong(HomeFragmentResult.KEY_DIARY_ID)
             viewModel.onEvent(HomeEvent.ClickTimelineItem(diaryId))
-            // moveToDetailPage(diaryId)
         }
 
         setChildFragmentResultListener(HomeFragmentResult.KEY_CALENDAR_ON_CLICK) { _, result ->
@@ -135,9 +131,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 ?: getCurrentSimpleDate()
 
             viewModel.onEvent(HomeEvent.ClickCalendarDay(diaryId, date))
-            // viewModel.onDiaryClick(diaryId)
-            // do something
-            // 고민되는 부분이다... 클릭된 날짜에 대한 정보를 Home 에서도 갱신해 놓을지...
         }
     }
 
@@ -151,6 +144,16 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         findNavController().navigate(action)
     }
 
+    // TODO : Need to deep dive :(
+    override fun onResume() {
+        super.onResume()
+        binding.viewPager.adapter = viewPagerAdapter
+    }
+
+    override fun onStop() {
+        binding.viewPager.adapter = null
+        super.onStop()
+    }
 }
 
 data class TabInfo(
