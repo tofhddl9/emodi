@@ -10,10 +10,18 @@
         android:name="com.lgtm.emoji_diary.view.home.HomeFragment" >
         <action
             android:id="@+id/action_home_fragment_to_edit_fragment"
-            app:destination="@id/edit_fragment" />
+            app:destination="@id/edit_fragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
         <action
             android:id="@+id/action_home_fragment_to_detail_fragment"
-            app:destination="@id/detail_fragment" />
+            app:destination="@id/detail_fragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
     </fragment>
 
     <fragment
@@ -26,17 +34,29 @@
             android:defaultValue="@null" />
         <action
             android:id="@+id/action_edit_fragment_to_datePickerFragment"
-            app:destination="@id/datePickerFragment" />
+            app:destination="@id/datePickerFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
         <action
             android:id="@+id/action_edit_fragment_to_timePickerFragment"
-            app:destination="@id/timePickerFragment" />
+            app:destination="@id/timePickerFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
         <argument
             android:name="diaryId"
             app:argType="long"
             android:defaultValue="-1L" />
         <action
             android:id="@+id/action_edit_fragment_to_emojiPickerFragment"
-            app:destination="@id/emojiPickerFragment" />
+            app:destination="@id/emojiPickerFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
     </fragment>
 
     <fragment
@@ -44,7 +64,11 @@
         android:name="com.lgtm.emoji_diary.view.detail.DetailFragment" >
         <action
             android:id="@+id/action_detail_fragment_to_edit_fragment"
-            app:destination="@id/edit_fragment" />
+            app:destination="@id/edit_fragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
         <argument
             android:name="diaryId"
             app:argType="long"
