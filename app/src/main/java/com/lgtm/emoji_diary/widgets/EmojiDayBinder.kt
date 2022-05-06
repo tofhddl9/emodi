@@ -8,10 +8,13 @@ import androidx.core.view.isVisible
 import com.kizitonwose.calendarview.model.CalendarDay
 import com.kizitonwose.calendarview.model.DayOwner
 import com.kizitonwose.calendarview.ui.DayBinder
+import com.lgtm.emoji_diary.R
 import com.lgtm.emoji_diary.data.Diary
 import com.lgtm.emoji_diary.utils.EmojiStore
 import com.lgtm.emoji_diary.view.edit.SimpleDate
 import com.lgtm.emoji_diary.view.edit.getCurrentSimpleDate
+import java.time.LocalDate
+import java.time.YearMonth
 
 class EmojiDayBinder(
     private val context: Context,
@@ -42,6 +45,7 @@ class EmojiDayBinder(
             )
         }
 
+        val today = LocalDate.now()
         diaryInfo?.also {
             container.textView.isVisible = false
             container.emojiView.isVisible = true
@@ -51,6 +55,11 @@ class EmojiDayBinder(
             container.textView.isVisible = true
             container.emojiView.isVisible = false
 
+            if (day.date == today) {
+                container.textView.setBackgroundResource(R.drawable.bg_selected_day)
+            } else {
+                container.textView.setBackground(null)
+            }
             container.textView.setTextColor(day.textColor())
             container.textView.text = day.day.toString()
         }
