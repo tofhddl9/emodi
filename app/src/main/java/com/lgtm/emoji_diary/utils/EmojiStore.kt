@@ -18,6 +18,12 @@ object EmojiStore {
         6 to EmojiInfo(6L, R.drawable.soso),
         7 to EmojiInfo(7L, R.drawable.shocked),
         8 to EmojiInfo(8L, R.drawable.sleepy),
+        9 to EmojiInfo(9L, R.drawable.heart),
+        10 to EmojiInfo(10L, R.drawable.party),
+        11 to EmojiInfo(11L, R.drawable.hungry),
+        12 to EmojiInfo(12L, R.drawable.joy),
+        13 to EmojiInfo(13L, R.drawable.thinking),
+        14 to EmojiInfo(14L, R.drawable.sweat),
     )
 
     fun getEmojiDrawable(context: Context, emojiId: Long): Drawable? {

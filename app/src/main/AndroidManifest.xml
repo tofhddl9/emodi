@@ -12,6 +12,7 @@
         android:theme="@style/AppTheme.Black" >
         <activity
             android:name="com.lgtm.emoji_diary.MainActivity"
+            android:screenOrientation="portrait"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
