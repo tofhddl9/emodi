@@ -77,7 +77,7 @@ dependencies {
     // 3rd-party libs
     implementation 'com.github.bumptech.glide:glide:4.11.0'
 
-    debugImplementation "com.jakewharton.timber:timber:$rootProject.timberVersion"
+    implementation "com.jakewharton.timber:timber:$rootProject.timberVersion"
 
     implementation 'com.github.kizitonwose:CalendarView:1.0.4'
 
