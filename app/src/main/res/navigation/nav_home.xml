@@ -29,7 +29,7 @@
         android:name="com.lgtm.emoji_diary.view.edit.EditFragment" >
         <argument
             android:name="date"
-            app:argType="com.lgtm.emoji_diary.view.edit.SimpleDate"
+            app:argType="com.lgtm.emoji_diary.data.SimpleDate"
             app:nullable="true"
             android:defaultValue="@null" />
         <action
@@ -81,7 +81,7 @@
         android:label="DatePickerFragment" >
         <argument
             android:name="date"
-            app:argType="com.lgtm.emoji_diary.view.edit.SimpleDate" />
+            app:argType="com.lgtm.emoji_diary.data.SimpleDate" />
     </dialog>
 
     <dialog
@@ -90,7 +90,7 @@
         android:label="TimePickerFragment" >
         <argument
             android:name="date"
-            app:argType="com.lgtm.emoji_diary.view.edit.SimpleDate" />
+            app:argType="com.lgtm.emoji_diary.data.SimpleDate" />
     </dialog>
 
     <dialog
@@ -99,7 +99,7 @@
         android:label="EmojiPickerFragment">
         <argument
             android:name="date"
-            app:argType="com.lgtm.emoji_diary.view.edit.SimpleDate"
+            app:argType="com.lgtm.emoji_diary.data.SimpleDate"
             app:nullable="true"
             android:defaultValue="@null" />
     </dialog>

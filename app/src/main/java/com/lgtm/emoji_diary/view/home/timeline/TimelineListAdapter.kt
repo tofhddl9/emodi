@@ -11,15 +11,15 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.lgtm.emoji_diary.R
 import com.lgtm.emoji_diary.data.Diary
+import com.lgtm.emoji_diary.data.SimpleDate
+import com.lgtm.emoji_diary.data.asDateFormat
+import com.lgtm.emoji_diary.data.asTimeFormat
+import com.lgtm.emoji_diary.data.isSaturday
+import com.lgtm.emoji_diary.data.isSunday
+import com.lgtm.emoji_diary.data.timeInMillisToSimpleDate
 import com.lgtm.emoji_diary.databinding.ItemTimelineBinding
 import com.lgtm.emoji_diary.utils.CalendarUtil
 import com.lgtm.emoji_diary.utils.EmojiStore
-import com.lgtm.emoji_diary.view.edit.SimpleDate
-import com.lgtm.emoji_diary.view.edit.asDateFormat
-import com.lgtm.emoji_diary.view.edit.asTimeFormat
-import com.lgtm.emoji_diary.view.edit.isSaturday
-import com.lgtm.emoji_diary.view.edit.isSunday
-import com.lgtm.emoji_diary.view.edit.timeInMillisToSimpleDate
 
 class TimelineListAdapter(
     private val itemClickListener: ((Long) -> Unit)? = null

@@ -10,11 +10,10 @@ import com.kizitonwose.calendarview.model.DayOwner
 import com.kizitonwose.calendarview.ui.DayBinder
 import com.lgtm.emoji_diary.R
 import com.lgtm.emoji_diary.data.Diary
+import com.lgtm.emoji_diary.data.SimpleDate
+import com.lgtm.emoji_diary.data.getCurrentSimpleDate
 import com.lgtm.emoji_diary.utils.EmojiStore
-import com.lgtm.emoji_diary.view.edit.SimpleDate
-import com.lgtm.emoji_diary.view.edit.getCurrentSimpleDate
 import java.time.LocalDate
-import java.time.YearMonth
 
 class EmojiDayBinder(
     private val context: Context,
@@ -23,10 +22,6 @@ class EmojiDayBinder(
 
     private val emojiMap = mutableMapOf<SimpleDate, Diary>()
 
-    // 일기는 하루에 하나만 쓴다. 같은 key를 가질 수 있겠는데? ...
-    // Edit에서 저장할때, year-month-day를 보고 갱신해야하나?
-    // Calendar에서 Edit 열때는 무조건 Date이 있으니까 Date 피커를 숨긴다?
-    //
     fun setEmojiMap(map: Map<SimpleDate, Diary>) {
         emojiMap.clear()
         emojiMap.putAll(map)
@@ -45,7 +40,6 @@ class EmojiDayBinder(
             )
         }
 
-        val today = LocalDate.now()
         diaryInfo?.also {
             container.textView.isVisible = false
             container.emojiView.isVisible = true
@@ -55,13 +49,15 @@ class EmojiDayBinder(
             container.textView.isVisible = true
             container.emojiView.isVisible = false
 
-            if (day.date == today) {
-                container.textView.setBackgroundResource(R.drawable.bg_selected_day)
-            } else {
-                container.textView.setBackground(null)
-            }
             container.textView.setTextColor(day.textColor())
             container.textView.text = day.day.toString()
+        }
+
+        val today = LocalDate.now()
+        if (day.date == today) {
+            container.binding.root.setBackgroundResource(R.drawable.bg_selected_day)
+        } else {
+            container.binding.root.background = null
         }
 
     }

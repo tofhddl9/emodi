@@ -1,7 +1,7 @@
 package com.lgtm.emoji_diary.view.home.calendar
 
 import com.lgtm.emoji_diary.data.Diary
-import com.lgtm.emoji_diary.view.edit.SimpleDate
+import com.lgtm.emoji_diary.data.SimpleDate
 
 data class CalendarUiState(
     val year: Int = 2022,

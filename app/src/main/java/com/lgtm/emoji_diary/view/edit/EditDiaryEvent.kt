@@ -1,5 +1,8 @@
 package com.lgtm.emoji_diary.view.edit
 
+import com.lgtm.emoji_diary.data.SimpleDate
+import com.lgtm.emoji_diary.data.getCurrentSimpleDate
+
 sealed class EditDiaryEvent {
     data class TitleChanged(val title: String) : EditDiaryEvent()
     data class ContentChanged(val content: String) : EditDiaryEvent()

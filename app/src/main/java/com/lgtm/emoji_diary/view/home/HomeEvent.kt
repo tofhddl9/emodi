@@ -1,6 +1,6 @@
 package com.lgtm.emoji_diary.view.home
 
-import com.lgtm.emoji_diary.view.edit.SimpleDate
+import com.lgtm.emoji_diary.data.SimpleDate
 
 sealed class HomeEvent {
     data class ClickCalendarDay(

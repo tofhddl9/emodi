@@ -9,10 +9,10 @@ import androidx.fragment.app.viewModels
 import com.kizitonwose.calendarview.model.CalendarMonth
 import com.kizitonwose.calendarview.ui.MonthScrollListener
 import com.lgtm.emoji_diary.R
+import com.lgtm.emoji_diary.data.SimpleDate
 import com.lgtm.emoji_diary.databinding.FragmentCalendarBinding
 import com.lgtm.emoji_diary.delegate.viewBinding
 import com.lgtm.emoji_diary.utils.CalendarUtil
-import com.lgtm.emoji_diary.view.edit.SimpleDate
 import com.lgtm.emoji_diary.view.home.HomeFragmentResult
 import com.lgtm.emoji_diary.view.home.TabInfo
 import com.lgtm.emoji_diary.widgets.EmojiDayBinder

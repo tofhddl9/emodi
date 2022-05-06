@@ -8,8 +8,8 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.setFragmentResult
 import androidx.navigation.fragment.navArgs
 import com.lgtm.emoji_diary.R
+import com.lgtm.emoji_diary.data.SimpleDate
 import com.lgtm.emoji_diary.view.edit.EditFragmentResult
-import com.lgtm.emoji_diary.view.edit.SimpleDate
 
 class DatePickerFragment : DialogFragment(), DatePickerDialog.OnDateSetListener {
 

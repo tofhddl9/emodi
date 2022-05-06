@@ -2,6 +2,10 @@ package com.lgtm.emoji_diary.view.edit
 
 import android.annotation.SuppressLint
 import com.lgtm.emoji_diary.data.Diary
+import com.lgtm.emoji_diary.data.SimpleDate
+import com.lgtm.emoji_diary.data.asTimeInMillis
+import com.lgtm.emoji_diary.data.makeDateFormatToSimpleDate
+import com.lgtm.emoji_diary.data.makeTimeFormatToSimpleDate
 
 /**
  *  using var for using 2-way binding

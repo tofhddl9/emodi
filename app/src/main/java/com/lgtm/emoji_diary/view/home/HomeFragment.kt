@@ -11,12 +11,12 @@ import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
 import com.lgtm.emoji_diary.R
+import com.lgtm.emoji_diary.data.SimpleDate
+import com.lgtm.emoji_diary.data.getCurrentSimpleDate
 import com.lgtm.emoji_diary.databinding.FragmentHomeBinding
 import com.lgtm.emoji_diary.delegate.viewBinding
 import com.lgtm.emoji_diary.utils.setChildFragmentResultListener
 import com.lgtm.emoji_diary.utils.showSnackBar
-import com.lgtm.emoji_diary.view.edit.SimpleDate
-import com.lgtm.emoji_diary.view.edit.getCurrentSimpleDate
 import com.lgtm.emoji_diary.view.home.calendar.CalendarFragment
 import com.lgtm.emoji_diary.view.home.timeline.TimelineFragment
 import dagger.hilt.android.AndroidEntryPoint

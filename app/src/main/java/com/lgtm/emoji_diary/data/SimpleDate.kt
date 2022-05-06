@@ -1,4 +1,4 @@
-package com.lgtm.emoji_diary.view.edit
+package com.lgtm.emoji_diary.data
 
 import android.os.Parcelable
 import androidx.annotation.IntRange

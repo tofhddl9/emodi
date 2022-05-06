@@ -15,6 +15,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.snackbar.Snackbar
 import com.lgtm.emoji_diary.R
+import com.lgtm.emoji_diary.data.SimpleDate
 import com.lgtm.emoji_diary.databinding.FragmentEditBinding
 import com.lgtm.emoji_diary.delegate.viewBinding
 import com.lgtm.emoji_diary.utils.EmojiStore

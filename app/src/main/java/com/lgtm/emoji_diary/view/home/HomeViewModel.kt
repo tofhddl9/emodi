@@ -2,7 +2,7 @@ package com.lgtm.emoji_diary.view.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.lgtm.emoji_diary.view.edit.SimpleDate
+import com.lgtm.emoji_diary.data.SimpleDate
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.flow.MutableSharedFlow
