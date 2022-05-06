@@ -7,6 +7,7 @@ import android.widget.DatePicker
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.setFragmentResult
 import androidx.navigation.fragment.navArgs
+import com.lgtm.emoji_diary.R
 import com.lgtm.emoji_diary.view.edit.EditFragmentResult
 import com.lgtm.emoji_diary.view.edit.SimpleDate
 
@@ -16,8 +17,7 @@ class DatePickerFragment : DialogFragment(), DatePickerDialog.OnDateSetListener 
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val date = args.date
-
-        return DatePickerDialog(requireContext(), this, date.year, date.month - 1, date.day)
+        return DatePickerDialog(requireContext(), R.style.DialogTheme, this, date.year, date.month - 1, date.day)
     }
 
     override fun onDateSet(view: DatePicker?, year: Int, month: Int, day: Int) {

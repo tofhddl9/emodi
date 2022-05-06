@@ -9,4 +9,12 @@
 
     <style name="AppTheme.Black" parent="AppTheme">
     </style>
+
+    <style name="DialogTheme" parent="Theme.AppCompat.Light.Dialog">
+        <item name="colorAccent">@color/sunday_red</item>
+        <item name="colorPrimary">@color/darkorange</item>
+        <item name="colorPrimaryDark">@color/darkorange</item>
+        <item name="android:headerBackground">#FF9530</item>
+        <item name="android:fullBright">#FF9530</item>
+    </style>
 </resources>

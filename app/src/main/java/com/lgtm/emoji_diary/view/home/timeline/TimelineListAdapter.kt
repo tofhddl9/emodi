@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import androidx.annotation.ColorInt
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -41,7 +42,10 @@ class TimelineListAdapter(
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(diary: Diary, itemClickListener: ((Long) -> Unit)?) {
-            binding.root.setOnClickListener {
+            binding.emojiView.animation = AnimationUtils.loadAnimation(binding.emojiView.context, R.anim.fade_transition_animation)
+            binding.container.animation = AnimationUtils.loadAnimation(binding.container.context, R.anim.fade_scale_animation)
+
+            binding.container.setOnClickListener {
                 itemClickListener?.invoke(diary.id)
             }
 
