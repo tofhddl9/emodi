@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/home_fragment"
-        android:name="com.lgtm.emoji_diary.view.home.HomeFragment" >
+        android:name="com.lgtm.emodi.view.home.HomeFragment" >
         <action
             android:id="@+id/action_home_fragment_to_edit_fragment"
             app:destination="@id/edit_fragment"
@@ -26,10 +26,10 @@
 
     <fragment
         android:id="@+id/edit_fragment"
-        android:name="com.lgtm.emoji_diary.view.edit.EditFragment" >
+        android:name="com.lgtm.emodi.view.edit.EditFragment" >
         <argument
             android:name="date"
-            app:argType="com.lgtm.emoji_diary.data.SimpleDate"
+            app:argType="com.lgtm.emodi.data.SimpleDate"
             app:nullable="true"
             android:defaultValue="@null" />
         <action
@@ -61,7 +61,7 @@
 
     <fragment
         android:id="@+id/detail_fragment"
-        android:name="com.lgtm.emoji_diary.view.detail.DetailFragment" >
+        android:name="com.lgtm.emodi.view.detail.DetailFragment" >
         <action
             android:id="@+id/action_detail_fragment_to_edit_fragment"
             app:destination="@id/edit_fragment"
@@ -77,29 +77,29 @@
 
     <dialog
         android:id="@+id/datePickerFragment"
-        android:name="com.lgtm.emoji_diary.view.edit.picker.DatePickerFragment"
+        android:name="com.lgtm.emodi.view.edit.picker.DatePickerFragment"
         android:label="DatePickerFragment" >
         <argument
             android:name="date"
-            app:argType="com.lgtm.emoji_diary.data.SimpleDate" />
+            app:argType="com.lgtm.emodi.data.SimpleDate" />
     </dialog>
 
     <dialog
         android:id="@+id/timePickerFragment"
-        android:name="com.lgtm.emoji_diary.view.edit.picker.TimePickerFragment"
+        android:name="com.lgtm.emodi.view.edit.picker.TimePickerFragment"
         android:label="TimePickerFragment" >
         <argument
             android:name="date"
-            app:argType="com.lgtm.emoji_diary.data.SimpleDate" />
+            app:argType="com.lgtm.emodi.data.SimpleDate" />
     </dialog>
 
     <dialog
         android:id="@+id/emojiPickerFragment"
-        android:name="com.lgtm.emoji_diary.view.edit.picker.EmojiPickerFragment"
+        android:name="com.lgtm.emodi.view.edit.picker.EmojiPickerFragment"
         android:label="EmojiPickerFragment">
         <argument
             android:name="date"
-            app:argType="com.lgtm.emoji_diary.data.SimpleDate"
+            app:argType="com.lgtm.emodi.data.SimpleDate"
             app:nullable="true"
             android:defaultValue="@null" />
     </dialog>
